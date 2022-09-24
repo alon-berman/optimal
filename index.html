@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>GetMessage.AI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="html/home.html">GetMessage.AI</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="html/add_message.html">Add New message</a></li>
+        <li><a href="html/results.html">Messages</a></li>
+        <li><a href="html/edit_result.html">Edit message</a></li>
+        <li><a href="html/delete_message.html">Delete Message</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid center bg-dark">
+    <h1>Welcome to the Messenger</h1>
+    <button id="dummyMessageGenerator" type="button" class="btn btn-default">Generate Dummy Messages!</button>
+
+  </div>
+<br/>
+<br/>
+<br/>
+
+<footer class="footer mt-auto py-3 bg-dark">
+    <div class="container">
+      <span class="text-light">All rights reserved to Alon berman and raz goldenberg</span>
+    </div>
+  </footer>
+  <script>
+    
+    $('#dummyMessageGenerator').click(function(){
+      for (let i = 0; i < 5; i++) {
+        message = "I'm a dummy message # " + i; 
+        $.post("http://localhost:8010/proxy/create",{"message": message, "author_email": "some@dummy.com", "send_time_delay_minutes":3, "recepient_email":"another@dummy.com", "max_retries":5}, function( data, status ) {
+          console.log("great success creating dummy messages")
+        }).fail(function(){
+          console.log("Something went wrong.");
+        });
+      }
+    });
+    </script>
+</body>
+</html>

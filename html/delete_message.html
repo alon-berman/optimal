@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>GetMessage.AI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="home.html">GetMessage.AI</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="add_message.html">Add New Message</a></li>
+        <li><a href="results.html">Messages</a></li>
+        <li><a href="edit_result.html">Edit Message</a></li>
+        <li class="active"><a href="delete_message.html">Delete Message</a></li>
+      </ul>
+    </div>
+  </nav>
+        
+<div class="container">
+  <h2>Delete Message</h2>
+  <form>
+    <div class="form-group">
+      <label for="message_id">ID:</label>
+      <input type="text" class="form-control" id="message_id" placeholder="Enter message id" name="message">
+    </div>
+    <!-- todo: use update function -->
+    <button id="deleteButton" type="button" class="btn btn-default">Delete</button>
+    <div clas="statusOutput"></div>
+  </form>
+</div>
+<footer class="footer mt-auto py-3 bg-dark">
+    <div class="container">
+      <span class="text-light">All rights reserved to Alon berman and raz goldenberg</span>
+    </div>
+  </footer>
+  <script>
+  $('#deleteButton').click(function() {
+    data = {"messageId": $('#message_id').val()};
+    $.ajax({
+      type: 'DELETE',
+      url: 'http://localhost:8010/proxy/message',
+      contentType: 'application/json',
+      data: JSON.stringify(data), // access in body
+    }).done(function (resp) {
+      $('.statusOutput').append(resp);
+    }).fail(function (msg) {
+        console.log('sOMETHING HAPPENED');
+    })
+  });
+    </script>
+</body>
+</html>
