@@ -1,5 +1,7 @@
-let DB = {}; // save data in-memory as a document object
+import mongoose from "mongoose";
 
+let DB = {}; // save data in-memory as a document object
+import {MessageSchema} from "../schema/app.schema.js"
 
 module.exports = {
     deleteItem: async function (uuid) {
@@ -14,12 +16,18 @@ module.exports = {
     },
 
     saveItem: async function (data) {
-        return new Promise((resolve, _) => {
             console.log("Saved Object")
             let uid = generateID();
-            DB[uid] = data;
-            resolve(uid);
-        });
+
+            const schema = {
+                _id: uid, message: data.message, author: data.author, category: data.category,
+                recipient: data.recepient, max_retries_to_send: data.max_retries_to_send
+            };
+            const Model = mongoose.model('MessageSchema', schema);
+
+            const doc = new Model();
+            doc._id = schema._id;
+            await doc.save(); // works
     },
 
     getById: function (uuid) {
