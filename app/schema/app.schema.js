@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 
-const MessageSchema = new Schema({
+export const MessageSchema = new Schema({
+    _id: Number, // represents Date.Now()
     message:  String, // String is shorthand for {type: String}
     author: String,
     category:   String,
