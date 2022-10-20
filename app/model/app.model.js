@@ -1,6 +1,3 @@
-import mongoose from "mongoose";
-
-let DB = {}; // save data in-memory as a document object
 import {MessageSchema} from "../schema/app.schema.js"
 
 module.exports = {
