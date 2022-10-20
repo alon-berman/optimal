@@ -1,10 +1,10 @@
-import {MessageSchema} from "../schema/app.schema.js"
+const MessageSchema =require('../schema/app.schema.js');
 
 module.exports = {
     deleteItem: async function (uuid) {
         return new Promise((resolve, reject) => {
             try {
-                MessageSchema.methods.delete(uuid);
+                MessageSchema.MessageSchema.methods.delete(uuid);
                 console.log("Deleted Object with " + uuid)
 
                 resolve(uuid);
@@ -23,7 +23,7 @@ module.exports = {
                     _id: uuid, message: data.message, author: data.author, category: data.category,
                     recipient: data.recipient, max_retries_to_send: data.max_retries_to_send
                 };
-                MessageSchema.methods.create(schema);
+                MessageSchema.MessageSchema.methods.create(schema);
                 console.log("Saved Object with " + uuid)
 
                 resolve(uuid);
@@ -36,7 +36,7 @@ module.exports = {
     getById: function (uuid) {
         return new Promise((resolve, reject) => {
             try {
-                const req = MessageSchema.methods.findType(uuid);
+                const req = MessageSchema.MessageSchema.methods.findType(uuid);
                 console.log("Got Object with " + uuid)
 
                 resolve(uuid);
@@ -50,7 +50,7 @@ module.exports = {
     getAll: function () {
         return new Promise((resolve, reject) => {
             try {
-                const req = MessageSchema.methods.findAll();
+                const req = MessageSchema.MessageSchema.methods.findAll();
                 console.log("Got all Objects")
 
                 resolve();
@@ -64,7 +64,7 @@ module.exports = {
     updateExisting: function (uuid, newObj) {
         return new Promise((resolve, reject) => {
             try {
-                MessageSchema.methods.update(uuid, newObj);
+                MessageSchema.MessageSchema.methods.update(uuid, newObj);
                 console.log("Updated Object with " + uuid)
 
                 resolve(uuid);
