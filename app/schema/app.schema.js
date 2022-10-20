@@ -8,7 +8,7 @@ export const MessageSchema = new Schema({
     message: String, // String is shorthand for {type: String}
     author: String,
     category: String,
-    recepient: String,
+    recipient: String,
     max_retries_to_send: Number,
 });
 

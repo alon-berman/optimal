@@ -21,7 +21,7 @@ module.exports = {
             try {
                 const schema = {
                     _id: uuid, message: data.message, author: data.author, category: data.category,
-                    recipient: data.recepient, max_retries_to_send: data.max_retries_to_send
+                    recipient: data.recipient, max_retries_to_send: data.max_retries_to_send
                 };
                 MessageSchema.methods.create(schema);
                 console.log("Saved Object with " + uuid)
