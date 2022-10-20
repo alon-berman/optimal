@@ -5,30 +5,76 @@ import {MessageSchema} from "../schema/app.schema.js"
 
 module.exports = {
     deleteItem: async function (uuid) {
-        MessageSchema.methods.delete(uuid);
+        return new Promise((resolve, reject) => {
+            try {
+                MessageSchema.methods.delete(uuid);
+                console.log("Deleted Object with " + uuid)
+
+                resolve(uuid);
+            } catch {
+                reject(uuid);
+            }
+        });
     },
 
     saveItem: async function (data) {
-        console.log("Saved Object")
-        let uid = generateID();
+        return new Promise((resolve, reject) => {
+            let uuid = generateID();
 
-        const schema = {
-            _id: uid, message: data.message, author: data.author, category: data.category,
-            recipient: data.recepient, max_retries_to_send: data.max_retries_to_send
-        };
-        MessageSchema.methods.create(schema);
+            try {
+                const schema = {
+                    _id: uuid, message: data.message, author: data.author, category: data.category,
+                    recipient: data.recepient, max_retries_to_send: data.max_retries_to_send
+                };
+                MessageSchema.methods.create(schema);
+                console.log("Saved Object with " + uuid)
+
+                resolve(uuid);
+            } catch {
+                reject(uuid);
+            }
+        });
     },
 
     getById: function (uuid) {
-        return MessageSchema.methods.findType(uuid);
+        return new Promise((resolve, reject) => {
+            try {
+                const req = MessageSchema.methods.findType(uuid);
+                console.log("Got Object with " + uuid)
+
+                resolve(uuid);
+                return req;
+            } catch {
+                reject(uuid);
+            }
+        });
     },
 
     getAll: function () {
-        return MessageSchema.methods.findAll();
+        return new Promise((resolve, reject) => {
+            try {
+                const req = MessageSchema.methods.findAll();
+                console.log("Got all Objects")
+
+                resolve();
+                return req;
+            } catch {
+                reject();
+            }
+        });
     },
 
     updateExisting: function (uuid, newObj) {
-        MessageSchema.methods.update(uuid, newObj);
+        return new Promise((resolve, reject) => {
+            try {
+                MessageSchema.methods.update(uuid, newObj);
+                console.log("Updated Object with " + uuid)
+
+                resolve(uuid);
+            } catch {
+                reject(uuid);
+            }
+        });
     }
 }
 
