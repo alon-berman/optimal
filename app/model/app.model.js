@@ -1,59 +1,81 @@
-let DB = {}; // save data in-memory as a document object
-
+const MessageSchema =require('../schema/app.schema.js');
 
 module.exports = {
-  deleteItem: async function(uuid) {
-    return new Promise((resolve, reject) => {
-    try{
-      delete DB[uuid];
-      resolve(uuid);
-    } catch {
-      resolve(null);
+    deleteItem: async function (uuid) {
+        return new Promise((resolve, reject) => {
+            try {
+                MessageSchema.MessageSchema.methods.delete(uuid);
+                console.log("Deleted Object with " + uuid)
+
+                resolve(uuid);
+            } catch {
+                reject(uuid);
+            }
+        });
+    },
+
+    saveItem: async function (data) {
+        return new Promise((resolve, reject) => {
+            let uuid = generateID();
+
+            try {
+                const schema = {
+                    _id: uuid, message: data.message, author: data.author, category: data.category,
+                    recipient: data.recipient, max_retries_to_send: data.max_retries_to_send
+                };
+                MessageSchema.MessageSchema.methods.create(schema);
+                console.log("Saved Object with " + uuid)
+
+                resolve(uuid);
+            } catch {
+                reject(uuid);
+            }
+        });
+    },
+
+    getById: function (uuid) {
+        return new Promise((resolve, reject) => {
+            try {
+                const req = MessageSchema.MessageSchema.methods.findType(uuid);
+                console.log("Got Object with " + uuid)
+
+                resolve(uuid);
+                return req;
+            } catch {
+                reject(uuid);
+            }
+        });
+    },
+
+    getAll: function () {
+        return new Promise((resolve, reject) => {
+            try {
+                const req = MessageSchema.MessageSchema.methods.findAll();
+                console.log("Got all Objects")
+
+                resolve();
+                return req;
+            } catch {
+                reject();
+            }
+        });
+    },
+
+    updateExisting: function (uuid, newObj) {
+        return new Promise((resolve, reject) => {
+            try {
+                MessageSchema.MessageSchema.methods.update(uuid, newObj);
+                console.log("Updated Object with " + uuid)
+
+                resolve(uuid);
+            } catch {
+                reject(uuid);
+            }
+        });
     }
-  });
-  },
-
-  saveItem: async function(data){
-    return new Promise((resolve, reject) => {
-      console.log("Saved Object")
-      uid = generateID();
-      DB[uid] = data;
-      resolve(uid);
-    });
-  },
-
-  getById: function(uuid){
-    return new Promise((resolve, reject) => {
-    try {
-      resolve(DB[uuid]);
-    } catch (error) {
-      resolve(null);
-    }  
-    });
-  },
-
-  getAll:function() {
-    return new Promise((resolve, reject) => {
-      console.log(DB)
-      resolve(DB);
-    });
-  },
-
-  updateExisting: function (uuid, data){
-    return new Promise((resolve, reject) => {
-      if (DB.hasOwnProperty(uuid)){
-        DB[uuid]['message'] = data;
-        resolve(uuid);
-      }
-      else{
-        console.log("Failed to find message")
-        resolve(null);
-      }
-    })
-  }
 }
 
 
-function generateID(){
-  return Date.now();
+function generateID() {
+    return Date.now();
 }

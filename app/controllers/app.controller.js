@@ -66,7 +66,7 @@ exports.update = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      console.log(error);
+      console.log(err);
       if (err.kind === "ObjectId") {
         return res.status(404).send({
           message: "Message not found with id " + req.body.messageId,
