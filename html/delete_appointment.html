@@ -12,32 +12,28 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="home.html">GetMessage.AI</a>
+        <a class="navbar-brand active" href="home.html">Home</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><a href="add_message.html">Add New Message</a></li>
-        <li><a href="results.html">Messages</a></li>
-        <li class="active"><a href="edit_result.html">Edit Message</a></li>
-        <li><a href="delete_message.html">Delete Message</a></li>
+        <li><a href="add_appointment.html">Add New Appointment</a></li>
+        <li><a href="appointments.html">My Appointments</a></li>
+        <li><a href="edit_appointment.html">Edit Appointments</a></li>
+        <li><a href="delete_appointment.html">Cancel Appointment</a></li>
 
       </ul>
     </div>
   </nav>
         
 <div class="container">
-  <h2>The first AI message editor</h2>
-  <form action="/action_page.php">
+  <h2>Delete Message</h2>
+  <form>
     <div class="form-group">
       <label for="message_id">ID:</label>
       <input type="text" class="form-control" id="message_id" placeholder="Enter message id" name="message">
     </div>
-    <div class="form-group">
-      <label for="message">Message:</label>
-      <input type="text" class="form-control" id="message_value" placeholder="Enter the message you desire" name="message_val">
-    </div>
     <!-- todo: use update function -->
-    <button id="editButton" type="button" class="btn btn-default">Submit</button>
-    <div class="statusOutput"></div>
+    <button id="deleteButton" type="button" class="btn btn-default">Delete</button>
+    <div clas="statusOutput"></div>
   </form>
 </div>
 <footer class="footer mt-auto py-3 bg-dark">
@@ -46,18 +42,18 @@
     </div>
   </footer>
   <script>
-  $('#editButton').click(function() {
-    data = {"messageId": $('#message_id').val(), "messageValue": $('#message_value').val()};
+  $('#deleteButton').click(function() {
+    data = {"messageId": $('#message_id').val()};
     $.ajax({
-      type: 'PUT',
+      type: 'DELETE',
       url: 'http://localhost:8010/proxy/message',
       contentType: 'application/json',
       data: JSON.stringify(data), // access in body
     }).done(function (resp) {
-      $('.statusOutput').append(' Successfully Edited Message # ' + resp);
+      $('.statusOutput').append(resp);
     }).fail(function (msg) {
-        console.log('FAIL');
-    }); 
+        console.log('sOMETHING HAPPENED');
+    })
   });
     </script>
 </body>
