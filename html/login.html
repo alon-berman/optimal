@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="/css/login.css" />
+  <style>
+    body {
+      background-image: url("/html/images/optical-background.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body>
+  <div class="topnav">
+    <a class="active" href="#home">דף הבית</a>
+    <a href="#news">ניהול פגישות</a>
+    <a href="#contact">קבע פגישה</a>
+    <a href="/html/aboutUs.html">אודות</a>
+    <a href="/html/contactUs.html">צור קשר</a>
+    <a href="/html/login.html">התחברות</a>
+  </div>
+  <form action="/api/login" method="post">
+    <div class="container">
+      <label for="uname"><b style="color:white">כתובת מייל</b></label>
+      <input type="text" placeholder="הכנס כתובת מייל" name="uname" required />
+
+      <label for="psw"><b style="color:white">סיסמה</b></label>
+      <input type="password" placeholder="הכנס סיסמה" name="psw" required />
+
+      <button type="submit">התחברות</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember" /> <b style="color: white">זכור אותי</b> 
+      </label>
+    </div>
+
+    <div class="container">
+      <button type="button" class="forgot">
+        שכחתי סיסמה</a>
+      </button>
+    </div>
+    <div class="container">
+      <button type="button" class="cancelbtn">ביטול</button>
+    </div>
+  </form>
+  <footer>
+    all rights reserved to Gal Yaish, Alon Berman, Raz Goldenberg & Peleg Admi&trade;
+  </footer>
+</body>

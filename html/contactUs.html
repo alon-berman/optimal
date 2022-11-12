@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="/css/contactUs.css" />
+  <style>
+    body {
+      background-image: url("/html/images/optical-background.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+
+  <title></title>
+  <meta charset="utf-8" />
+  <script type="text/javascript">
+    function GetMap() {
+      var map = new Microsoft.Maps.Map("#myMap", {
+        credentials:
+          "AkXUNI5exQKtVYAEDcKViVF5nNi9eiJFU7js4oAtmprKa6MVaaMoMw4oeckP2sKA",
+        center: new Microsoft.Maps.Location(31.9699736, 34.8023227),
+      });
+
+      var center = map.getCenter();
+
+      //Create custom Pushpin
+      var pin = new Microsoft.Maps.Pushpin(center, {
+        title: "Microsoft",
+        subTitle: "City Center",
+        text: "1",
+      });
+
+      //Add the pushpin to the map
+      map.entities.push(pin);
+    }
+  </script>
+  <script
+    type="text/javascript"
+    src="http://www.bing.com/api/maps/mapcontrol?callback=GetMap"
+    async
+    defer
+  ></script>
+</head>
+
+<body>
+  <div class="topnav">
+    <a class="active" href="#home">דף הבית</a>
+    <a href="#news">ניהול פגישות</a>
+    <a href="#contact">קבע פגישה</a>
+    <a href="#about">אודות</a>
+    <a href="#/html/contactUs.html">צור קשר</a>
+    <a href="/html/login.html">התחברות</a>
+  </div>
+  <form action="/api/contactUs">
+    <label for="fname">שם פרטי</label>
+    <input type="text" id="fname" name="firstname" />
+
+    <label for="lname">שם משפחה</label>
+    <input type="text" id="lname" name="lastname" />
+    <label for="phone">טלפון </label>
+    <br />
+    <input type="number" id="phoneNr" name="phonenumber" />
+    <br />
+    <label for="email">כתובת מייל </label>
+    <input type="text" id="email" name="email" />
+    <label for="subject">תוכן הפניה</label>
+    <textarea
+      id="subject"
+      name="subject"
+      placeholder=""
+      style="height: 200px"
+    ></textarea>
+
+    <input type="submit" value="Submit" />
+  </form>
+
+  <div id="myMap" style="width: 600px; height: 400px"></div>
+
+  <footer>
+    all rights reserved to Gal Yaish, Alon Berman, Raz Goldenberg & Peleg
+    Admi&trade;
+  </footer>
+</body>

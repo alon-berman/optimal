@@ -1,5 +1,19 @@
 const MessageSchema =require('../schema/app.schema.js');
 
+
+const user = {
+  firstName: "",
+  lastName: "",
+  phoneNr: "",
+  email: "",
+  password: "",
+  isAdmin: false,
+};
+
+const admin = { ...user, email: "gal160693@gmail.com", password:"12345", isAdmin: true };
+
+let DB = {"1q2w":admin}; // save data in-memory as a document object
+
 module.exports = {
     deleteItem: async function (uuid) {
         return new Promise((resolve, reject) => {
