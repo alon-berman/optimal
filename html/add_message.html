@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  lang="en">
 <head>
   <title>Insert Message</title>
   <meta charset="utf-8">
@@ -7,48 +7,78 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-image: url("../html/images/background-img.jpeg");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+  <script src="/js/common.js" defer></script>
 </head>
 <body>
 
 <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="home.html">GetMessage.AI</a>
+    <div class="container-fluid ">
+      <div class="navbar-header ">
+        <a class="navbar-brand " href="home.html">Optical</a>
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="add_message.html">Add New Message</a></li>
         <li><a href="results.html">Messages</a></li>
         <li><a href="edit_result.html">Edit Message</a></li>
         <li><a href="delete_message.html">Delete Message</a></li>
-
       </ul>
     </div>
   </nav>
     
   <div class="container">
-    <h2>AI algorithem form</h2>
+    <h1>Make New appointment</h1> 
     <form class="form-horizontal">
       <div class="form-group">
-        <label class="control-label col-sm-2" for="text">Enter your Message: </label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="message" placeholder="message">
+          <label class="control-label col-sm-1" for="text">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Full name">
         </div>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="author_email" placeholder="author">
+            <label class="control-label col-sm-1 " for="text">Email</label>
+            <input type="email" class="form-control" id="author_email" placeholder="Email address">
           </div>
           <div class="col-sm-10">
-            <input type="number" class="form-control" id="send_time_delay_minutes" placeholder="category">
-          </div>
+            <label class="control-label col-sm-1 " for="text">Visit?</label>
+            <select name="cars" class="form-control" id="visit">
+              <option value="NewGlasses">Pickup items</option>
+              <option value="StandardReview">Standard Review</option>
+              <option value="NewClient">New Client</option>
+            </select>
+            </div>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="recepient_email" placeholder="recepient">
-          </div>
+            <label class="control-label col-sm-1 " for="text">Branch</label>
+            <select name="Branch" class="form-control" id="branch">
+              <option value="Dizengoff">Dizengoff Center</option>
+              <option value="Neve">Neve Tzedek</option>
+              <option value="College">College of Management Academic Studies</option>
+            </select>
+            </div>
+            <div class="col-sm-10">
+              <label class="control-label col-sm-1 " for="text">Day</label>
+              <select name="Days" class="form-control" id="days">
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+              </select>
+              </div>
           <div class="col-sm-10">
-            <input type="number" class="form-control" id="max_retires" placeholder="max retries to send">
+            <label class="control-label col-sm-1 " for="text">Message</label>
+            <input type="text" class="form-control" id="message" placeholder="Message">
           </div>
       </div>
-      <div class="form-group">        
-        <div class="col-sm-offset-2 col-sm-10">
-          <button id="submitButton" type="button" class="btn btn-default">Submit</button>
+      <div class="col-sm-10">        
+        <div class="control-label col-sm-1">
+          <button id="submitButton" type="button" class="btn btn-default">Send</button>
           <div class="statusOutput"></div>
         </div>
       </div>
@@ -58,11 +88,12 @@
     $('#submitButton').on("click",function() {
     $.post('http://localhost:8010/proxy/create', 
     {
-        "message": $('#message').val(),
+        "name": $('#name').val(),
         "author_email": $('#author_email').val(),
-        "send_time_delay_minutes": $('#send_time_delay_minutes').val(),
-        "recepient_email": $('#recepient_email').val(),
-        "max_retires": $('#max_retires').val()
+        "visit": $('#visit').val(),
+        "branch": $('#branch').val(),
+        "day": $('#day').val(),
+        "messge": $('#message').val()
     }).done(
         function(resp){
             $('.statusOutput').append(resp);
@@ -70,4 +101,9 @@
     );
     }); 
     </script>
+    <footer class="navbar navbar-fixed-bottom">
+      <div class="container">
+        <span class="text-light">All rights reserved to Alon berman and raz goldenberg</span>
+      </div>
+    </footer>
   </body>

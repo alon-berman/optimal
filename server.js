@@ -1,23 +1,23 @@
 const express = require("express");
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
 const Controller = require("./app/controllers/app.controller.js");
 const apiRoute = require("./app/routes/app.routes");
 const path = require("path");
 const app = express();
-let PORT = 8080;
+let PORT = 8081;
 
 const swaggerOptions = {
-  swaggerDefinition:{
+  swaggerDefinition: {
     info: {
-      title: 'Optimal',
-      version: '1.0.0'
-    }
+      title: "Optimal",
+      version: "1.0.0",
+    },
   },
-  apis:['server.js'],
+  apis: ["server.js"],
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 //todo create swagger.json to use swagger from '/api-docs'
 
@@ -39,16 +39,16 @@ app.use("/html", express.static(path.join("html")));
 
 app.get("/", (req, res) => {
   //res.json({ message: "Server is running :D" });
-  res.sendFile("/Projects/Optimal/optimal/html/login.html");
+  res.sendFile("/Projects/myOptimal/optimal/html/login.html");
 });
 
 app.get("/signup", (req, res) => {
   //res.json({ message: "Server is running :D" });
-  res.sendFile("/Projects/Optimal/optimal/html/sighUp.html");
+  res.sendFile("/Projects/myOptimal/optimal/html/sighUp.html");
 });
 app.get("/contactUs", (req, res) => {
   //res.json({ message: "Server is running :D" });
-  res.sendFile("/Projects/Optimal/optimal/html/contactUs.html");
+  res.sendFile("/Projects/myOptimal/optimal/html/contactUs.html");
 });
 // app.get("/aboutUs", (req, res) => {
 //   //res.json({ message: "Server is running :D" });

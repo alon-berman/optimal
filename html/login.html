@@ -9,20 +9,20 @@
       background-repeat: no-repeat;
     }
   </style>
+  <script src="/js/common.js" defer></script>
 </head>
 <body>
   <div class="topnav">
-    <a class="active" href="#home">דף הבית</a>
+    <a href="#home">דף הבית</a>
     <a href="#news">ניהול פגישות</a>
-    <a href="#contact">קבע פגישה</a>
-    <a href="/html/aboutUs.html">אודות</a>
+    <a href="/html/appointment.html">קבע פגישה</a>
     <a href="/html/contactUs.html">צור קשר</a>
     <a href="/html/login.html">התחברות</a>
   </div>
   <form action="/api/login" method="post">
     <div class="container">
       <label for="uname"><b style="color:white">כתובת מייל</b></label>
-      <input type="text" placeholder="הכנס כתובת מייל" name="uname" required />
+      <input type="email" placeholder="הכנס כתובת מייל" name="uname" required />
 
       <label for="psw"><b style="color:white">סיסמה</b></label>
       <input type="password" placeholder="הכנס סיסמה" name="psw" required />
@@ -39,7 +39,12 @@
       </button>
     </div>
     <div class="container">
-      <button type="button" class="cancelbtn">ביטול</button>
+      <button type="button" class="forgot" onclick="window.location='signUp.html'">
+        <a>הרשמה</a>
+      </button>
+    </div>
+    <div class="container">
+      <button type="button" class="cancelbtn" onclick="window.location='login.html'">ביטול </button>
     </div>
   </form>
   <footer>

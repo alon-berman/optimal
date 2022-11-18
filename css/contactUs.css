@@ -14,7 +14,7 @@ textarea {
 
 /* Style the submit button with a specific background color etc */
 input[type="submit"] {
-  background-color: #04aa6d;
+  background-color: rgba(63, 130, 56, 0.7);
   color: white;
   padding: 12px 20px;
   border: none;
@@ -70,6 +70,7 @@ form {
   float: left;
   margin-top: 60px;
   margin-left: 30px;
+  width: 30%;
 }
 
 footer {
