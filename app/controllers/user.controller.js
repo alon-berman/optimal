@@ -52,6 +52,7 @@ exports.findOne = (req, res) => {
     });
 };
 exports.login = (req, res) => {
+  console.log(req);
   console.log(req.body);
   const { uname, psw } = req.body;
   DBHandler.getByEmailPass(uname, psw).then((user) => {
@@ -63,25 +64,6 @@ exports.login = (req, res) => {
       res.sendFile("html/home.html", { root: __dirname });
     }
   });
-  // DBHandler.getById(req.params.messageId)
-  //   .then((data) => {
-  //     if (!data) {
-  //       return res.status(404).send({
-  //         message: "Message not found with id " + req.params.messageId,
-  //       });
-  //     }
-  //     res.send(data);
-  //   })
-  //   .catch((err) => {
-  //     if (err.kind === "ObjectId") {
-  //       return res.status(404).send({
-  //         message: "Message not found with id " + req.params.messageId,
-  //       });
-  //     }
-  //     return res.status(500).send({
-  //       message: "Error retrieving message with id " + req.params.messageId,
-  //     });
-  //   });
 };
 
 // Update a message identified by the messageId in the request
