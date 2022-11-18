@@ -1,52 +1,104 @@
 <!DOCTYPE html>
+<html  lang="en">
 <head>
-  <link rel="stylesheet" href="/css/appointment.css" />
-
+  <title>Insert Message</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/add_message.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
     body {
-      background-image: url("/html/images/optical-background.png");
+      background-image: url("../html/images/optical-background.png");
       background-size: cover;
       background-repeat: no-repeat;
     }
   </style>
-  <script src="/common.js" defer></script>
+  <script src="/js/common.js" defer></script>
 </head>
 <body>
+
   <div class="topnav">
     <a href="#home">Home</a>
     <a href="#news">My Appointments </a>
     <a href="/html/appointment.html">Set Appointment </a>
     <a href="/html/contactUs.html">Contact Us </a>
     <a href="/html/login.html">Login</a>
+    <a href="/html/about_us.html">About us</a>
   </div>
-  <form action="/api/contactUs">
-    <label for="name"> Full Name</label>
-    <input
-      type="text"
-      id="name"
-      name="name"
-      placeholder="Enter your full name here"
-    />
-    <label for="city"> City</label>
-    <input
-      type="text"
-      id="city"
-      name="city"
-      placeholder="Enter your city here"
-    />
-    <label for="phone">Phone Nr.</label>
-    <input
-      type="number"
-      id="phone"
-      name="phone"
-      placeholder="Enter your phone number here"
-    />
-    <label for="greenPdf">טופס ירוק</label>
-    <input type="file" name="upload" accept="application/pdf" />
-    <input type="submit" value="Submit" />
-  </form>
-  <footer>
-    all rights reserved to Gal Yaish, Alon Berman, Raz Goldenberg & Peleg
-    Admi&trade;
-  </footer>
-</body>
+  <div class="container">
+    <h1>Make New appointment</h1> 
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-10">
+          <label class="control-label col-sm-1" for="text">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Full name">
+        </div>
+        <div class="col-sm-10">
+            <label class="control-label col-sm-1 " for="text">Email</label>
+            <input type="email" class="form-control" id="author_email" placeholder="Email address">
+          </div>
+          <div class="col-sm-10">
+            <label class="control-label col-sm-1 " for="text">Visit?</label>
+            <select name="cars" class="form-control" id="visit">
+              <option value="NewGlasses">Pickup items</option>
+              <option value="StandardReview">Standard Review</option>
+              <option value="NewClient">New Client</option>
+            </select>
+            </div>
+          <div class="col-sm-10">
+            <label class="control-label col-sm-1 " for="text">Branch</label>
+            <select name="Branch" class="form-control" id="branch">
+              <option value="Dizengoff">Dizengoff Center</option>
+              <option value="Neve">Neve Tzedek</option>
+              <option value="College">College of Management Academic Studies</option>
+            </select>
+            </div>
+            <div class="col-sm-10">
+              <label class="control-label col-sm-1 " for="text">Day</label>
+              <select name="Days" class="form-control" id="days">
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+              </select>
+              </div>
+          <div class="col-sm-10">
+            <label class="control-label col-sm-1 " for="text">Message</label>
+            <input type="text" class="form-control" id="message" placeholder="Message">
+          </div>
+      </div>
+      <div class="col-sm-10">        
+        <div class="control-label col-sm-1">
+          <button id="submitButton" type="button" class="btn btn-default">Send</button>
+          <div class="statusOutput"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+    $('#submitButton').on("click",function() {
+    $.post('http://localhost:8010/proxy/create', 
+    {
+        "name": $('#name').val(),
+        "author_email": $('#author_email').val(),
+        "visit": $('#visit').val(),
+        "branch": $('#branch').val(),
+        "day": $('#day').val(),
+        "messge": $('#message').val()
+    }).done(
+        function(resp){
+            $('.statusOutput').append(resp);
+        }
+    );
+    }); 
+    </script>
+    <footer class="navbar navbar-fixed-bottom">
+      <div class="container">
+        <span class="text-light">All rights reserved to Alon berman and raz goldenberg</span>
+      </div>
+    </footer>
+  </body>
