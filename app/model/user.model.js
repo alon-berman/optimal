@@ -1,9 +1,6 @@
-const MessageSchema = require("../schema/app.schema.js");
+const UserSchema = require("../schema/user.schema.js");
 
 const user = {
-  firstName: "",
-  lastName: "",
-  phoneNr: "",
   email: "",
   password: "",
   isAdmin: false,
@@ -23,7 +20,7 @@ module.exports = {
   deleteItem: async function (uuid) {
     return new Promise((resolve, reject) => {
       try {
-        MessageSchema.MessageSchema.methods.delete(uuid);
+        UserSchema.UserSchema.methods.delete(uuid);
         console.log("Deleted Object with " + uuid);
 
         resolve(uuid);
@@ -40,13 +37,12 @@ module.exports = {
       try {
         const schema = {
           _id: uuid,
-          message: data.message,
-          author: data.author,
-          category: data.category,
-          recipient: data.recipient,
-          max_retries_to_send: data.max_retries_to_send,
+          email: data.email,
+          password: data.password,
+          isAdmin: false,
+          month: new Date().getMonth() + 1,
         };
-        MessageSchema.MessageSchema.methods.create(schema);
+        UserSchema.UserSchema.methods.create(schema);
         console.log("Saved Object with " + uuid);
 
         resolve(uuid);
@@ -59,7 +55,7 @@ module.exports = {
   getById: function (uuid) {
     return new Promise((resolve, reject) => {
       try {
-        const req = MessageSchema.MessageSchema.methods.findType(uuid);
+        const req = UserSchema.UserSchema.methods.findType(uuid);
         console.log("Got Object with " + uuid);
 
         resolve(uuid);
@@ -70,16 +66,24 @@ module.exports = {
     });
   },
 
-  getAll: function () {
+  getAll: async function () {
+    console.log("getall");
+    const req = await UserSchema.find();
+    console.log("req", req);
+    return req;
+  },
+
+  getAll1: function () {
     return new Promise((resolve, reject) => {
       try {
-        const req = MessageSchema.MessageSchema.methods.findAll();
+        const req = UserSchema.find();
         console.log("Got all Objects");
 
-        resolve();
+        resolve(req);
         return req;
-      } catch {
-        reject();
+      } catch (err) {
+        console.log(err);
+        reject(err);
       }
     });
   },
@@ -87,7 +91,7 @@ module.exports = {
   updateExisting: function (uuid, newObj) {
     return new Promise((resolve, reject) => {
       try {
-        MessageSchema.MessageSchema.methods.update(uuid, newObj);
+        UserSchema.UserSchema.methods.update(uuid, newObj);
         console.log("Updated Object with " + uuid);
 
         resolve(uuid);

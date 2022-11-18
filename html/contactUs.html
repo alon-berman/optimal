@@ -12,6 +12,7 @@
 
   <title></title>
   <meta charset="utf-8" />
+  <script src="/js/common.js" defer></script>
   <script type="text/javascript">
     function GetMap() {
       var map = new Microsoft.Maps.Map("#myMap", {
@@ -43,26 +44,45 @@
 
 <body>
   <div class="topnav">
-    <a class="active" href="#home">דף הבית</a>
-    <a href="#news">ניהול פגישות</a>
-    <a href="#contact">קבע פגישה</a>
-    <a href="#about">אודות</a>
-    <a href="#/html/contactUs.html">צור קשר</a>
-    <a href="/html/login.html">התחברות</a>
+    <a href="#home">Home</a>
+    <a href="#news">My Appointments </a>
+    <a href="/html/appointment.html">Set Appointment </a>
+    <a href="/html/contactUs.html">Contact Us </a>
+    <a href="/html/login.html">Login</a>
   </div>
   <form action="/api/contactUs">
-    <label for="fname">שם פרטי</label>
-    <input type="text" id="fname" name="firstname" />
+    <label for="fname">First Name </label>
+    <input
+      type="text"
+      id="fname"
+      name="firstname"
+      placeholder="Enter your first name here"
+    />
 
-    <label for="lname">שם משפחה</label>
-    <input type="text" id="lname" name="lastname" />
-    <label for="phone">טלפון </label>
+    <label for="lname">Last Name </label>
+    <input
+      type="text"
+      id="lname"
+      name="lastname"
+      placeholder="Enter your last name here"
+    />
+    <label for="phone">Phone Nr. </label>
     <br />
-    <input type="number" id="phoneNr" name="phonenumber" />
+    <input
+      type="number"
+      id="phoneNr"
+      name="phonenumber"
+      placeholder="Enter your phone number here"
+    />
     <br />
-    <label for="email">כתובת מייל </label>
-    <input type="text" id="email" name="email" />
-    <label for="subject">תוכן הפניה</label>
+    <label for="email">Email </label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      placeholder="Enter your email here"
+    />
+    <label for="subject"> </label>
     <textarea
       id="subject"
       name="subject"
@@ -70,13 +90,13 @@
       style="height: 200px"
     ></textarea>
 
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Send" />
   </form>
 
   <div id="myMap" style="width: 600px; height: 400px"></div>
 
   <footer>
-    all rights reserved to Gal Yaish, Alon Berman, Raz Goldenberg & Peleg
+    All rights reserved to Gal Yaish, Alon Berman, Raz Goldenberg & Peleg
     Admi&trade;
   </footer>
 </body>

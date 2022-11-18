@@ -15,7 +15,7 @@ form {
 }
 
 /* Full-width input fields */
-input[type="text"],
+input[type="email"],
 input[type="password"] {
   width: 100%;
   padding: 15px;
@@ -84,7 +84,7 @@ button:hover {
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: right;
+  float: left;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;

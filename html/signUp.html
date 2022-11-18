@@ -8,29 +8,34 @@
       background-repeat: no-repeat;
     }
   </style>
+  <script src="/js/common.js" defer></script>
 </head>
 <body>
   <div class="topnav">
-    <a class="active" href="#home">דף הבית</a>
-    <a href="#news">ניהול פגישות</a>
-    <a href="#setAppointment">קבע פגישה</a>
-    <a href="#about">אודות</a>
-    <a href="/html/contactUs.html">צור קשר</a>
-    <a href="/html/login.html">התחברות</a>
+    <a href="#home">Home</a>
+    <a href="#news">My Appointments </a>
+    <a href="/html/appointment.html">Set Appointment </a>
+    <a href="/html/contactUs.html">Contact Us </a>
+    <a href="/html/login.html">Login</a>
   </div>
-  <form action="action_page.php" style="border: 1px solid #ccc">
+  <form
+    method="post"
+    action="/api/signup"
+    onsubmit="return onSignup(event)"
+    style="border: 1px solid #ccc"
+  >
     <div class="container">
       <h1 style="color: white">הרשמה</h1>
       <hr />
 
-      <label for="email"><b style="color: white">כתובת מייל</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required />
+      <label for="email"><b style="color: white">Email</b></label>
+      <input type="email" placeholder="Enter Email" name="email" required />
 
-      <label for="psw"><b style="color: white">סיסמה</b></label>
+      <label for="psw"><b style="color: white">Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required />
 
       <label for="psw-repeat"
-        ><b style="color: white">הקלידו שוב את הסיסמה</b></label
+        ><b style="color: white">Retype Password</b></label
       >
       <input
         type="password"
@@ -40,17 +45,17 @@
       />
       <label>
         <input type="checkbox" checked="checked" name="remember" />
-        <b style="color: white">זכור אותי</b>
+        <b style="color: white">Remember me</b>
       </label>
 
       <div class="clearfix">
-        <button type="button" class="cancelbtn">ביטול</button>
-        <button type="submit" class="signupbtn">הרשמה</button>
+        <button type="button" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signupbtn">Submit</button>
       </div>
     </div>
   </form>
   <footer>
-    all rights reserved to Gal Yaish, Alon Berman, Raz Goldenberg & Peleg
+    All rights reserved to Gal Yaish, Alon Berman, Raz Goldenberg & Peleg
     Admi&trade;
   </footer>
 </body>

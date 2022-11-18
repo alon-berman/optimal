@@ -1,23 +1,31 @@
 const express = require("express");
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
 const Controller = require("./app/controllers/app.controller.js");
 const apiRoute = require("./app/routes/app.routes");
+const apiUserRoute = require("./app/routes/user.routes");
 const path = require("path");
 const app = express();
-let PORT = 8080;
+let PORT = 8081;
 
 const swaggerOptions = {
-  swaggerDefinition:{
+  swaggerDefinition: {
     info: {
-      title: 'Optimal',
-      version: '1.0.0'
-    }
+      title: "Optimal",
+      version: "1.0.0",
+    },
   },
-  apis:['server.js'],
+  apis: ["server.js"],
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+/*
+const URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-1no8m.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+mongoose.connect(URL)
+	.then( () => console.log('connectted to db))
+	.catch((error) => console.log(error));er
+*/
 
 //todo create swagger.json to use swagger from '/api-docs'
 
@@ -29,6 +37,7 @@ app.get("/message/:messageId", Controller.findOne);
 
 app.put("/message", Controller.update);
 
+app.use("/api/user", apiUserRoute);
 app.use("/api", apiRoute);
 
 app.use("/css", express.static(path.join("css")));
@@ -39,16 +48,16 @@ app.use("/html", express.static(path.join("html")));
 
 app.get("/", (req, res) => {
   //res.json({ message: "Server is running :D" });
-  res.sendFile("/Projects/Optimal/optimal/html/login.html");
+  res.sendFile("/Projects/myOptimal/optimal/html/login.html");
 });
 
 app.get("/signup", (req, res) => {
   //res.json({ message: "Server is running :D" });
-  res.sendFile("/Projects/Optimal/optimal/html/sighUp.html");
+  res.sendFile("/Projects/myOptimal/optimal/html/sighUp.html");
 });
 app.get("/contactUs", (req, res) => {
   //res.json({ message: "Server is running :D" });
-  res.sendFile("/Projects/Optimal/optimal/html/contactUs.html");
+  res.sendFile("/Projects/myOptimal/optimal/html/contactUs.html");
 });
 // app.get("/aboutUs", (req, res) => {
 //   //res.json({ message: "Server is running :D" });
