@@ -55,11 +55,11 @@ exports.login = (req, res) => {
   const { uname, psw } = req.body;
   DBHandler.getByEmailPass(uname, psw).then((user) => {
     if (!user) {
-      res.sendFile("/Projects/Optimal/optimal/html/login.html");
+      res.sendFile("html/login.html", { root: __dirname });
     } else if (user.isAdmin === true) {
-      res.sendFile("/Projects/Optimal/optimal/html/admin.html");
+      res.sendFile("html/admin.html", { root: __dirname });
     } else {
-      res.sendFile("/Projects/Optimal/optimal/html/home.html");
+      res.sendFile("html/home.html", { root: __dirname });
     }
   });
   // DBHandler.getById(req.params.messageId)

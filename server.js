@@ -1,7 +1,7 @@
 const express = require("express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
-const Controller = require("./app/controllers/app.controller.js");
+const Controller = require("./app/controllers/user.controller.js");
 const apiRoute = require("./app/routes/app.routes");
 const apiUserRoute = require("./app/routes/user.routes");
 const path = require("path");
@@ -19,6 +19,9 @@ const swaggerOptions = {
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+// Point express to the root folder of the hosted files 
+app.use(express.static(__dirname));
 
 /*
 const URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-1no8m.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
@@ -38,6 +41,7 @@ app.get("/message/:messageId", Controller.findOne);
 app.put("/message", Controller.update);
 
 app.use("/api/user", apiUserRoute);
+
 app.use("/api", apiRoute);
 
 app.use("/css", express.static(path.join("css")));
@@ -48,25 +52,21 @@ app.use("/html", express.static(path.join("html")));
 
 app.get("/", (req, res) => {
   //res.json({ message: "Server is running :D" });
-  res.sendFile("/Projects/myOptimal/optimal/html/login.html");
+  res.sendFile("html/login.html", { root: __dirname });
 });
 
-app.get("/signup", (req, res) => {
+app.post("/signup", (req, res) => {
   //res.json({ message: "Server is running :D" });
-  res.sendFile("/Projects/myOptimal/optimal/html/sighUp.html");
+  res.sendFile("html/sighUp.html", { root: __dirname });
 });
 app.get("/contactUs", (req, res) => {
   //res.json({ message: "Server is running :D" });
-  res.sendFile("/Projects/myOptimal/optimal/html/contactUs.html");
+  res.sendFile("html/contactUs.html", { root: __dirname });
 });
-// app.get("/aboutUs", (req, res) => {
-//   //res.json({ message: "Server is running :D" });
-//   res.sendFile("/Projects/Optimal/optimal/html/aboutUs.html");
-// });
 
 app.delete("/message", Controller.delete);
 
-// require("./app/routes/app.routes.js")(app);
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
