@@ -2,14 +2,14 @@ const DBHandler = require("../model/app.model.js");
 
 // Create and Save a new Message
 exports.create = async (req, res) => {
+  console.log(req.body);
   await DBHandler.saveItem(req.body)
     .then((data) => {
       res.send("great success!\n UID: " + data);
     })
     .catch((err) => {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while saving the data.",
+        message: err.message || "Some error occurred while saving the data.",
       });
     });
 };
@@ -50,13 +50,42 @@ exports.findOne = (req, res) => {
       });
     });
 };
+exports.login = (req, res) => {
+  console.log(req.body);
+  const { uname, psw } = req.body;
+  DBHandler.getByEmailPass(uname, psw).then((user) => {
+    if (!user) {
+      res.sendFile("html/login.html", { root: __dirname });
+    } else if (user.isAdmin === true) {
+      res.sendFile("html/admin.html", { root: __dirname });
+    } else {
+      res.sendFile("html/home.html", { root: __dirname });
+    }
+  });
+  // DBHandler.getById(req.params.messageId)
+  //   .then((data) => {
+  //     if (!data) {
+  //       return res.status(404).send({
+  //         message: "Message not found with id " + req.params.messageId,
+  //       });
+  //     }
+  //     res.send(data);
+  //   })
+  //   .catch((err) => {
+  //     if (err.kind === "ObjectId") {
+  //       return res.status(404).send({
+  //         message: "Message not found with id " + req.params.messageId,
+  //       });
+  //     }
+  //     return res.status(500).send({
+  //       message: "Error retrieving message with id " + req.params.messageId,
+  //     });
+  //   });
+};
 
 // Update a message identified by the messageId in the request
 exports.update = (req, res) => {
-  DBHandler.updateExisting(
-    req.body.messageId,
-    req.body.messageValue
-  )
+  DBHandler.updateExisting(req.body.messageId, req.body.messageValue)
     .then((data) => {
       if (!data) {
         return res.status(404).send({
@@ -87,7 +116,7 @@ exports.delete = (req, res) => {
           message: "Message not found with id " + req.body.messageId,
         });
       }
-      res.send('message #' + data + 'deleted successfully!');
+      res.send("message #" + data + "deleted successfully!");
     })
     .catch((err) => {
       if (err.kind === "ObjectId" || err.name === "NotFound") {

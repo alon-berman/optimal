@@ -1,5 +1,7 @@
-module.exports = (app) => {
-  const App = require("../controllers/app.controller.js");
+const express = require("express");
+const router = express.Router();
+
+const App = require("../controllers/app.controller.js");
 
   /**
    * @swagger
@@ -19,13 +21,16 @@ module.exports = (app) => {
    *
    * **/
 
-  app.post("/create", App.create);
+router.post("/", App.create);
 
-  app.get("/get-all", App.findAll);
+router.post("/login", App.login);
 
-  app.get("/message/:messageId", App.findOne);
+router.get("/get-all", App.findAll);
 
-  app.put("/message", App.update);
+router.get("/message/:messageId", App.findOne);
 
-  app.delete("/message", App.delete);
-};
+router.put("/message", App.update);
+
+router.delete("/message", App.delete);
+
+module.exports = router;
