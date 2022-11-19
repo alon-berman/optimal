@@ -1,6 +1,5 @@
 const AppointmentSchema = require("../schema/app.schema.js");
 
-
 module.exports = {
   deleteItem: async function (uuid) {
     return new Promise((resolve, reject) => {
@@ -16,6 +15,7 @@ module.exports = {
   },
 
   saveItem: async function (data) {
+    console.log("data", data);
     return new Promise((resolve, reject) => {
       let uuid = generateID();
 
@@ -61,7 +61,7 @@ module.exports = {
 
         resolve(req);
         return req;
-      } catch (err){
+      } catch (err) {
         reject(err);
       }
     });

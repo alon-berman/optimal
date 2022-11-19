@@ -5,9 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="/css/adminData.css" />
+    <style>
+      body {
+        background-image: url("/html/images/optical-background.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    </style>
   </head>
   <body>
-    <div id="div"></div>
+    <div class="topnav">
+      <a href="/">Home</a>
+      <a href="#news">Manage Appointments </a>
+      <a href="#schedule">Appointments Calender</a>
+      <a href="/html/adminData.html">Statistics</a>
+    </div>
+    <div id="userPerMonthDiv">
+      <h2>Users Per Month</h2>
+    </div>
+    <div id="appointmentsPerBranch">
+      <h2>Appointments Per Branch</h2>
+    </div>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script>
       // set the dimensions and margins of the graph
@@ -16,60 +35,73 @@
         height = 400 - margin.top - margin.bottom;
 
       // append the svg object to the body of the page
-      var svg = d3
-        .select("#div")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      function createSvg(id) {
+        var svg = d3
+          .select(`#${id}`)
+          .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          );
+        return svg;
+      }
 
       // Parse the Data
-      const data = [
-        { month: "Jan", Value: 15 },
-        { month: "Feb", Value: 0 },
-        { month: "Mar", Value: 13 },
-        { month: "Apr", Value: 27 },
-      ];
-      //   d3.csv(
-      //     "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv"
-      //   );
 
-      async function getData() {
+      async function getSignUpData() {
         const response = await fetch("http://localhost:8081/api/user/get-all");
         const users = await response.json();
-        const usersdummy = [
-          { email: "aaa@mail.com", month: 1 },
-          { email: "aaa@mail.com", month: 2 },
-          { email: "aaa@mail.com", month: 1 },
-          { email: "aaa@mail.com", month: 3 },
-          { email: "aaa@mail.com", month: 3 },
-          { email: "aaa@mail.com", month: 4 },
-          { email: "aaa@mail.com", month: 5 },
-        ];
 
         const usersPerMonth = [
-          { month: "Jan", Value: 0 },
-          { month: "Feb", Value: 0 },
-          { month: "Mar", Value: 0 },
-          { month: "Apr", Value: 0 },
-          { month: "May", Value: 0 },
-          { month: "Jun", Value: 0 },
-          { month: "Jul", Value: 0 },
-          { month: "Aug", Value: 0 },
-          { month: "Sep", Value: 0 },
-          { month: "Oct", Value: 0 },
-          { month: "Nov", Value: 0 },
-          { month: "Dec", Value: 0 },
+          { key: "Jan", Value: 0 },
+          { key: "Feb", Value: 0 },
+          { key: "Mar", Value: 0 },
+          { key: "Apr", Value: 0 },
+          { key: "May", Value: 0 },
+          { key: "Jun", Value: 0 },
+          { key: "Jul", Value: 0 },
+          { key: "Aug", Value: 0 },
+          { key: "Sep", Value: 0 },
+          { key: "Oct", Value: 0 },
+          { key: "Nov", Value: 0 },
+          { key: "Dec", Value: 0 },
         ];
         for (let i = 0; i < users.length; i++) {
           usersPerMonth[users[i].month - 1].Value++;
         }
         console.log(usersPerMonth);
-        createChart(usersPerMonth);
+        const svg = createSvg("userPerMonthDiv");
+        createChart(usersPerMonth, svg);
       }
 
-      function createChart(data) {
+      async function getBranchData() {
+        const response = await fetch(
+          "http://localhost:8081/api/appointment/get-all"
+        );
+        const appointments = await response.json();
+
+        const appointmentsPerBranch = [
+          { key: "Dizengoff", Value: 0 },
+          { key: "Neve", Value: 0 },
+          { key: "College", Value: 0 },
+        ];
+        console.log(appointments);
+        for (let i = 0; i < appointments.length; i++) {
+          //appointmentsPerBranch[appointments[i].branch].Value++;
+          const index = appointmentsPerBranch.findIndex(
+            (e) => e.key === appointments[i].branch
+          );
+          appointmentsPerBranch[index].Value++;
+        }
+        console.log(appointmentsPerBranch);
+        const svg = createSvg("appointmentsPerBranch");
+        createChart(appointmentsPerBranch, svg);
+      }
+
+      function createChart(data, svg) {
         // sort data
         //   data.sort(function (b, a) {
         //     return a.Value - b.Value;
@@ -81,7 +113,7 @@
           .range([0, width])
           .domain(
             data.map(function (d) {
-              return d.month;
+              return d.key;
             })
           )
           .padding(0.2);
@@ -104,7 +136,7 @@
           .enter()
           .append("rect")
           .attr("x", function (d) {
-            return x(d.month);
+            return x(d.key);
           })
           .attr("y", function (d) {
             return y(d.Value);
@@ -116,7 +148,12 @@
           .attr("fill", "#69b3a2");
       }
       //createChart(data);
-      getData();
+      getSignUpData();
+      getBranchData();
     </script>
+    <footer>
+      All rights reserved to Gal Yaish, Alon Berman, Raz Goldenberg & Peleg
+      Admi&trade;
+    </footer>
   </body>
 </html>
