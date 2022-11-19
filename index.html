@@ -1,54 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>GetMessage.AI</title>
+  <title>Optical</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/bot.css" />
+  <link rel="stylesheet" href="/css/appointment.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="html/home.html">GetMessage.AI</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="html/add_message.html">Add New message</a></li>
-        <li><a href="html/results.html">Messages</a></li>
-        <li><a href="html/edit_result.html">Edit message</a></li>
-        <li><a href="html/delete_message.html">Delete Message</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="container-fluid center bg-dark">
-    <h1>Welcome to the Messenger</h1>
-    <button id="dummyMessageGenerator" type="button" class="btn btn-default">Generate Dummy Messages!</button>
-
-  </div>
-<br/>
-<br/>
-<br/>
-
-<footer class="footer mt-auto py-3 bg-dark">
-    <div class="container">
-      <span class="text-light">All rights reserved to Alon berman and raz goldenberg</span>
-    </div>
-  </footer>
   <script>
-    
-    $('#dummyMessageGenerator').click(function(){
-      for (let i = 0; i < 5; i++) {
-        message = "I'm a dummy message # " + i; 
-        $.post("http://localhost:8010/proxy/create",{"message": message, "author_email": "some@dummy.com", "send_time_delay_minutes":3, "recepient_email":"another@dummy.com", "max_retries":5}, function( data, status ) {
-          console.log("great success creating dummy messages")
-        }).fail(function(){
-          console.log("Something went wrong.");
-        });
+    let webSocket = new WebSocket('ws://0.0.0.0:3000');
+    let el;
+
+    webSocket.onmessage = (event) => {
+      el = document.getElementById('time');
+      el.innerHTML = 'Current time on server is: ' + event.data;
+    };
+  </script>
+  <div class="topnav">
+    <a href="index.html">Home</a>
+    <a href="/html/login.html">Login</a>
+    <a href="/html/signUp.html">SignUp</a>
+    <a href="/html/contactUs_simple.html">Contact Us </a>
+  </div>
+</head>
+<style>
+  body {
+    background-image: url("../html/images/optical-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+</style>
+<style>
+  img {
+    opacity: 1;
+  }
+  </style>
+<script src="/common.js" defer></script>
+<body class="position-fixed">
+  <div class="text-left">
+    <section class="text" >
+      <h1>Our motto</h2>
+      <p>Eyes is a sensitive subject and rightly so, we at Optical believe in service above all.</p>
+      <p>that's why we promoted the site.
+      </p>
+    </section> 
+    <section class="text" >
+      <h1>A little about our site</h2>
+      <p>Optical's website was founded in 2022 by 4 students at the College of Management</p>
+        <p>their goal was to provide you, the customers, with the best service with maximum convenience
+      </p>
+    </section> 
+    <video width="500" height="300" controls autoplay="true" class="fixed-bottom">
+      <source src="/html/images/Glasses Commercial.mp4" type="video/mp4" >
+      <source src="/html/images/Glasses Commercial.mp4" type="video/ogg">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <aside>
+    <h1>Reviews</h1>
+    <h5>Aviv shabat</h2>
+    <p>"Excellent and courteous service"</p>
+    <h5>Eden tubol</h2>
+    <p>"The staff is wonderful and very professional"</p>
+    <h5> Giora Spiegelman</h2>
+    <p>"A wonderful shopping and appointment booking experience"</p>
+    </aside>
+    <style>
+      aside {
+        width: 20%;
+        padding-left: 15px;
+        margin-left: 40px;
+        float: right;
+        font-style: italic;
+        background-color: lightgray;
       }
-    });
-    </script>
+      </style>
+<footer class="navbar navbar-fixed-bottom">
+  <div class="container">
+    <span class="text-light">All rights reserved to Alon , Raz , Gal and Peleg</span>
+  </div>
+</footer>
 </body>
 </html>
