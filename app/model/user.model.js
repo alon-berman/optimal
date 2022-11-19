@@ -27,7 +27,7 @@ module.exports = {
           month: new Date().getMonth() + 1,
         };
         console.log("creating user..");
-        userSchema.User.methods.create(user_registration_request);
+        userSchema.create(user_registration_request);
         console.log("Saved Object with " + uuid);
 
         resolve(uuid);

@@ -1,5 +1,6 @@
 const DBHandler = require("../model/user.model.js");
 const path = require("path");
+const { response } = require("express");
 
 // Create and Save a new Message
 exports.create = async (req, res) => {
@@ -10,6 +11,7 @@ exports.create = async (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
+  res.redirect("/html/appointment.html");
 };
 
 // Retrieve all messages from the database.
