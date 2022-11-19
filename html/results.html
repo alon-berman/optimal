@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>GetMessage.AI</title>
+  <title>Optical</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/appointment.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-image: url("images/optical-background.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
 </head>
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="home.html">GetMessage.AI</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="add_message.html">Add New Message</a></li>
-        <li class="active"><a href="results.html">Messages</a></li>
-        <li><a href="edit_result.html">Edit Message</a></li>
-        <li><a href="delete_message.html">Delete Message</a></li>
-
-      </ul>
-    </div>
-  </nav>
-    
+  <div class="topnav">
+    <a href="/html/results.html">Home</a>
+    <a href="/html/edit_result.html">My Appointments </a>
+    <a href="/html/appointment.html">Set Appointment </a>
+    <a href="/html/contactUs.html">Contact Us </a>
+    <a href="/html/login.html">Login</a>
+    <a href="/html/about_us.html">About us</a>
+  </div>
 <div class="container">
-  <h2>Filterable Table</h2>
+  <h2>Your appointment</h2>
   <p>Enter the params you want to search: </p>  
-  <input class="form-control" id="user_input" type="text" placeholder="Search By ID">
+  <input class="form-control" id="user_input" type="text" placeholder="Search By Name">
   <br>
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Message</th>
-        <th>Author</th>
-        <th>Delay Between Messages</th>
-        <th>Recepient Email</th>
-        <th>Max Retries</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Visit</th>
+        <th>Branch</th>
+        <th>Day</th>
+        <th>Time</th>
       </tr>
     </thead>
     <tbody id="messageTable">    
@@ -68,10 +70,10 @@ $(document).ready(function(){
   });
 });
 </script>
-<footer class="footer mt-auto py-3 bg-dark">
-    <div class="container">
-      <span class="text-light">All rights reserved to Alon berman and raz goldenberg</span>
-    </div>
-  </footer>
+<footer class="navbar navbar-fixed-bottom">
+  <div class="container">
+    <span class="text-light">All rights reserved to Alon , Raz , Gal and Peleg</span>
+  </div>
+</footer>
 </body>
 </html>
