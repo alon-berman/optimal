@@ -18,9 +18,10 @@
 </head>
 <body>
   <div class="topnav">
-    <a href="/html/results.html">Home</a>
-    <a href="/html/edit_result.html">My Appointments </a>
-    <a href="/html/appointment.html">Set Appointment </a>
+    <a href="#home">Home</a>
+    <a href="/html/appointment.html">Set New Appointment </a>
+    <a href="/html/results.html">My Appointments</a>
+    <a href="/html/edit_result.html">Edit Appointment </a>
     <a href="/html/contactUs.html">Contact Us </a>
     <a href="/html/login.html">Login</a>
     <a href="/html/about_us.html">About us</a>
@@ -50,7 +51,7 @@
 
 <script>
 $(document).ready(function(){
-  $.get("http://localhost:8081/appointment/get-all", function( message, status ) {
+  $.get("http://localhost:8081/api/appointment/get-all", function( message, status ) {
     $.each(message, function(message_key, message_data_fields){
       let row = '';
       row += '<tr>';

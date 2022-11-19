@@ -13,7 +13,6 @@ const userSchema = new Schema({
 
 
 userSchema.methods.create = async function (obj) {
-  console.log('test');
   return mongoose.model("userSchema").create(obj);
 };
 userSchema.methods.findType = function (uuid) {
@@ -29,4 +28,6 @@ userSchema.methods.delete = function (uuid) {
   return mongoose.model("userSchema").deleteOne({ _id: uuid });
 };
 
-const User = mongoose.model("User", userSchema);
+mongoose.model("userSchema", userSchema);
+
+module.exports.User = userSchema

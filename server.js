@@ -6,7 +6,8 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 const Controller = require("./app/controllers/user.controller.js");
 const path = require("path");
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const DBHandler = require('./db/db_handler.js')
 
 
 // ##########################
@@ -75,18 +76,23 @@ app.post("/contactUs", (req, res) => {
   // Put contact us log
 });
 
-app.use("/api/user", userRouteApi);
+app.use("/api/user", userRouteApi); 
 
 app.use("/api/appointment", appointmentApi);
 
-
-app.listen(PORT, () => {
-  // print available routes
-  app._router.stack.forEach(print.bind(null, []));
-
-
-  console.log(`Server is listening on port ${PORT}`);
-});
+try{
+  app.listen(PORT, () => {
+    // print available routes
+    DBHandler.connect();
+    app._router.stack.forEach(print.bind(null, []));
+  
+  
+    console.log(`Server is listening on port ${PORT}`);
+  });
+  
+} catch {
+  DBHandler.client.close()
+}
 
 
 // ########

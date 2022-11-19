@@ -1,27 +1,12 @@
 const DBHandler = require("../model/user.model.js");
+const path = require('path');
 
 // Create and Save a new Message
 exports.create = async (req, res) => {
+  console.log("Creating instance")
   console.log(req.body);
   
-  await DBHandler.saveItem({email: req.body.email, password: req.body.password}).then((user) => {
-    if (!user) {
-      res.sendFile("html/login.html", { root: __dirname });
-    } else if (user.isAdmin === true) {
-      res.sendFile("html/admin.html", { root: __dirname });
-    } else {
-      res.sendFile("html/home.html", { root: __dirname });
-    }
-  }).catch((err) => {
-    if (err.kind === "ObjectId") {
-      return res.status(404).send({
-        message: "Message not found with id " + req.params.messageId,
-      });
-    }
-    return res.status(500).send({
-      message: "Error retrieving message with id " + req.params.messageId,
-    });
-  });
+  await DBHandler.saveItem({email: req.body.email, password: req.body.password});
 }
 
 // Retrieve all messages from the database. 

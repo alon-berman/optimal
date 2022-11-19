@@ -1,32 +1,37 @@
-
-const {MongoClient} = require('mongodb');
+const mongoose = require("mongoose");
 
 let client;
+let users;
+let isInitialized = false;
+
+function close(){
+    client.close()
+}
 
 async function connect(){
     /**
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
      * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
      */
-    const uri = "mongodb://localhost:27012/";
+    const uri = "mongodb://0.0.0.0:27017/";
   
   
-    client = new MongoClient(uri);
   
     try {
-        // Connect to the MongoDB cluster
-        await client.connect();
+        
+        // Connect to the MongoDB cluster        
+        // await client.connect(); 
+        // const db = client.db('OpticalDb');
+        // users = db.collection('Users');
+        mongoose.connect(uri);
+        isInitialized = true;
+
   
     } catch (e) {
         console.error(e);
-    } finally {
-        await client.close();
-    }
-  }
-  
-  connect().catch(console.error);
+  }  
+}
   
   module.exports.client = client;
   module.exports.connect = connect;
-  module.exports = mongoose.model("User", userSchema);
-  connect(); 
+  module.exports.close = close;

@@ -6,12 +6,12 @@ module.exports = {
   deleteItem: async function (uuid) {
     return new Promise((resolve, reject) => {
       try {
-        userSchema.userSchema.methods.delete(uuid);
+        userSchema.User.methods.delete(uuid);
         console.log("Deleted Object with " + uuid);
 
         resolve(uuid);
       } catch {
-        reject(uuid);
+        reject(uuid); 
       }
     });
   },
@@ -29,7 +29,7 @@ module.exports = {
           month: new Date().getMonth() + 1,
         };
         console.log("creating user..");
-        userSchema.userSchema.methods.create(user_registration_request);
+        userSchema.User.methods.create(user_registration_request);
         console.log("Saved Object with " + uuid);
 
         resolve(uuid);
