@@ -92,11 +92,11 @@ exports.update = (req, res) => {
 
 // Delete a message with the specified messageId in the request
 exports.delete = (req, res) => {
-  DBHandler.deleteItem(req.body.messageId)
+  DBHandler.deleteItem(req.body.userId)
     .then((data) => {
       if (!data) {
         return res.status(404).send({
-          message: "Message not found with id " + req.body.messageId,
+          message: "Message not found with id " + req.body.userId,
         });
       }
       res.send("message #" + data + "deleted successfully!");
@@ -104,11 +104,11 @@ exports.delete = (req, res) => {
     .catch((err) => {
       if (err.kind === "ObjectId" || err.name === "NotFound") {
         return res.status(404).send({
-          message: "Message not found with id " + req.body.messageId,
+          message: "Message not found with id " + req.body.userId,
         });
       }
       return res.status(500).send({
-        message: "Could not delete message with id " + req.body.messageId,
+        message: "Could not delete message with id " + req.body.userId,
       });
     });
 };

@@ -30,7 +30,7 @@ module.exports = {
           message: data.message,
         };
         AppointmentSchema.appointment.methods.create(schema);
-        console.log("Saved Object with " + uuid);
+        console.log("Saved Object with id " + uuid);
 
         resolve(uuid);
       } catch {
