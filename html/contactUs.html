@@ -2,7 +2,12 @@
 
 <head>
   <link rel="stylesheet" href="/css/contactUs.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+    crossorigin="anonymous"
+  />
   <style>
     body {
       background-image: url("/html/images/optical-background.png");
@@ -19,15 +24,15 @@
       var map = new Microsoft.Maps.Map("#myMap", {
         credentials:
           "AkXUNI5exQKtVYAEDcKViVF5nNi9eiJFU7js4oAtmprKa6MVaaMoMw4oeckP2sKA",
-        center: new Microsoft.Maps.Location(31.9699736, 34.8023227),
+        center: new Microsoft.Maps.Location(32.075295133091316, 34.7749395),
       });
 
       var center = map.getCenter();
 
       //Create custom Pushpin
       var pin = new Microsoft.Maps.Pushpin(center, {
-        title: "Microsoft",
-        subTitle: "City Center",
+        title: "Optical",
+        subTitle: "Dizengoff Center",
         text: "1",
       });
 
@@ -98,7 +103,7 @@
 
   <div id="myMap" style="width: 600px; height: 400px"></div>
 
-  <footer  class="footer navbar-fixed-bottom">
+  <footer class="footer navbar-fixed-bottom">
     All rights reserved to Gal Yaish, Alon Berman, Raz Goldenberg & Peleg
     Admi&trade;
   </footer>
