@@ -72,7 +72,7 @@ app.get("/contactUs", (req, res) => {
 });
 
 app.post("/contactUs", (req, res) => {
-  
+  // Put contact us log
 });
 
 app.use("/api/user", userRouteApi);

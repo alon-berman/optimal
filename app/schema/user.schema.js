@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
+
 const userSchema = new Schema({
   _id: Number, // Overridden to represent Date.Now()
   email: String,
@@ -12,7 +13,7 @@ const userSchema = new Schema({
 
 
 userSchema.methods.create = async function (obj) {
-  console.log(obj);
+  console.log('test');
   return mongoose.model("userSchema").create(obj);
 };
 userSchema.methods.findType = function (uuid) {
@@ -29,5 +30,3 @@ userSchema.methods.delete = function (uuid) {
 };
 
 const User = mongoose.model("User", userSchema);
-
-module.exports = mongoose.model("User", userSchema);

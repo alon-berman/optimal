@@ -21,7 +21,7 @@ module.exports = {
       let uuid = generateID();
 
       try {
-        const schema = {
+        const user_registration_request = {
           _id: uuid,
           email: data.email,
           password: data.password,
@@ -29,7 +29,7 @@ module.exports = {
           month: new Date().getMonth() + 1,
         };
         console.log("creating user..");
-        userSchema.userSchema.methods.create(schema);
+        userSchema.userSchema.methods.create(user_registration_request);
         console.log("Saved Object with " + uuid);
 
         resolve(uuid);
