@@ -18,7 +18,8 @@
     "mongoose": "^6.6.0",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0",
-    "utf-8-validate": "^5.0.10"
+    "utf-8-validate": "^5.0.10",
+    "ws": "^8.11.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

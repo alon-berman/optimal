@@ -5,8 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/bot.css" />
-  <link rel="stylesheet" href="/css/appointment.css" />
+  <link rel="stylesheet" href="/css/index.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script>
@@ -22,7 +21,7 @@
     <a href="index.html">Home</a>
     <a href="/html/login.html">Login</a>
     <a href="/html/signUp.html">SignUp</a>
-    <a href="/html/contactUs_simple.html">Contact Us </a>
+    <a href="/html/about_us.html">About us</a>
   </div>
 </head>
 <style>
@@ -77,6 +76,35 @@
         background-color: lightgray;
       }
       </style>
+   <script type="text/javascript">
+    function GetMap() {
+      var map = new Microsoft.Maps.Map("#myMap", {
+        credentials:
+          "AkXUNI5exQKtVYAEDcKViVF5nNi9eiJFU7js4oAtmprKa6MVaaMoMw4oeckP2sKA",
+        center: new Microsoft.Maps.Location(31.9699736, 34.8023227),
+      });
+
+      var center = map.getCenter();
+
+      //Create custom Pushpin
+      var pin = new Microsoft.Maps.Pushpin(center, {
+        title: "Microsoft",
+        subTitle: "City Center",
+        text: "1",
+      });
+
+      //Add the pushpin to the map
+      map.entities.push(pin);
+    }
+  </script>
+  <script
+    type="text/javascript"
+    src="http://www.bing.com/api/maps/mapcontrol?callback=GetMap"
+    async
+    defer
+  ></script> 
+  <div id="myMap" style="width: 600px; height: 400px" class="top-left"></div>
+  
 <footer class="navbar navbar-fixed-bottom">
   <div class="container">
     <span class="text-light">All rights reserved to Alon , Raz , Gal and Peleg</span>

@@ -1,80 +1,74 @@
-* {
-  box-sizing: border-box;
-}
+/* Bordered form */
 body {
   text-align: center;
 }
-
-form {
-  background-color: rgba(0, 0, 0, 0.8);
-  width: 37%;
-  border: 3px solid #f1f1f1;
-  border-radius: 10px;
-  /* display: inline-block; */
-  margin-top: 30px;
+body {
+  background-image: url("../html/images/optical-background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-/* Full-width input fields */
+form {
+  border: 3px solid #f1f1f1;
+  border-radius: 10px;
+  width: 25%;
+  /* display: inline-block; */
+  margin-top: 5%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+img {
+  width: 60%;
+}
+
+/* Full-width inputs */
+input[type="text"],
 input[type="email"],
 input[type="password"] {
   width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
+  padding: 12px 20px;
+  margin: 8px 0;
   display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  box-sizing: border-box;
+  text-align: left;
 }
 
 /* Set a style for all buttons */
 button {
   background-color: rgba(63, 130, 56, 0.7);
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
+  padding: 12px 18px;
+  margin: 2px 0;
+  border-radius: 6px;
   cursor: pointer;
   width: 100%;
-  opacity: 0.9;
 }
 
+/* Add a hover effect for buttons */
 button:hover {
-  opacity: 1;
+  opacity: 0.8;
 }
 
-/* Extra styles for the cancel button */
+/* Extra style for the cancel button (red) */
 .cancelbtn {
-  padding: 14px 20px;
   background-color: rgba(144, 16, 16, 0.7);
 }
 
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn,
-.signupbtn {
-  float: left;
-  width: 50%;
+.forgot {
+  background-color: rgba(122, 121, 121, 0.7);
 }
 
-/* Add padding to container elements */
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Add padding to containers */
 .container {
-  padding: 16px;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+  padding: 8px;
 }
 
 .topnav {
@@ -99,23 +93,40 @@ button:hover {
 }
 
 /* Add a color to the active/current link */
-.topnav a.active {
+.topnav a:active {
   background-color: rgba(240, 86, 86, 0.7);
   color: white;
 }
+.active {
+  background-color: rgba(240, 86, 86, 0.7);
+  color: white;
+}
+
 footer {
   position: sticky;
-  margin-top: 50px;
+  margin-top: 80px;
   bottom: 0px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: smaller;
   color: rgba(40, 23, 11, 0.7);
 }
 
-/* Change styles for cancel button and signup button on extra small screens */
+/* The "Forgot password" text */
+/* span.psw {
+  float: right;
+  padding-top: 16px;
+  width: auto;
+  padding: 10px 18px;
+  background-color: lightgrey;
+} */
+
+/* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn,
-  .signupbtn {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
     width: 100%;
   }
 }

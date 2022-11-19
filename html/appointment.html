@@ -11,24 +11,15 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style>
-      body {
-        background-image: url("../html/images/optical-background.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
-    </style>
     <script src="/common.js" defer></script>
   </head>
   <body>
     <div class="topnav">
-      <a href="#home">Home</a>
+      <a href="/html/results.html">Home</a>
       <a href="/html/appointment.html">Set New Appointment </a>
-      <a href="/html/results.html">My Appointments</a>
+      <a href="/html/delete_message.html">Delete Appointments</a>
       <a href="/html/edit_result.html">Edit Appointment </a>
-      <a href="/html/contactUs.html">Contact Us </a>
-      <a href="/html/login.html">Login</a>
-      <a href="/html/about_us.html">About us</a>
+      <a href="/index.html">Log Out</a>
     </div>
     <div class="container">
       <h1>Make New appointment</h1>
@@ -83,15 +74,13 @@
             </select>
           </div>
           <div class="col-sm-10">
-            <label class="control-label col-sm-1" for="text">Day</label>
-            <select name="date" class="form-control" id="days">
-              <option value="Sunday">Sunday</option>
-              <option value="Monday">Monday</option>
-              <option value="Tuesday">Tuesday</option>
-              <option value="Wednesday">Wednesday</option>
-              <option value="Thursday">Thursday</option>
-              <option value="Friday">Friday</option>
-            </select>
+            <label class="control-label col-sm-1" for="text">Date</label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="days"
+              name="date"
+            />
           </div>
           <div class="col-sm-10">
             <label class="control-label col-sm-1" for="text">Message</label>
@@ -121,7 +110,7 @@
     </div>
     <footer class="navbar navbar-fixed-bottom">
       <div class="container">
-        <span class="text-light">All rights reserved</span>
+        <span class="text-light">All rights reserved to Alon , Raz , Gal and Peleg</span>
       </div>
     </footer>
   </body>

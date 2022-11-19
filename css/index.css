@@ -1,8 +1,3 @@
-body {
-  background-image: url("/html/images/optical-background.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 .topnav {
   background-color: rgba(51, 51, 51, 0.7);
   overflow: hidden;
