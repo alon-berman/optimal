@@ -7,20 +7,20 @@ function handleNavBar() {
   }
 }
 
-function onSignup(event) {
+function passwordValidation(event) {
   //event.target.elements.email.value;
-  const psw = event.target.elements.psw;
+  const password = event.target.elements.password;
   const pswRepeat = event.target.elements["psw-repeat"];
 
-  if (psw.value.length < 5) {
+  if (password.value.length < 5) {
     alert("Password must have at least 5 characters");
 
     return false;
   }
 
   let pswValid = false;
-  for (let i = 0; i < psw.value.length; i++) {
-    if (psw.value[i] >= "A" && psw.value[i] <= "Z") {
+  for (let i = 0; i < password.value.length; i++) {
+    if (password.value[i] >= "A" && password.value[i] <= "Z") {
       pswValid = true;
     }
   }

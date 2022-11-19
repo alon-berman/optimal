@@ -1,36 +1,34 @@
 const express = require("express");
 const router = express.Router();
 
-const App = require("../controllers/app.controller.js");
+const AppointmentController = require("../controllers/app.controller.js");
 
   /**
    * @swagger
    * /create:
    *   post:
-   *     description:Create new Message
+   *     description:Create new appointment
    *     responses:
    *       200:
    *        description: Success
    *
    * /get-all:
    *   get:
-   *     description: Get all Messages
+   *     description: Get all appointments
    *     responses:
    *       200:
    *        description: Success
    *
    * **/
 
-router.post("/", App.create);
+router.get("/get-all", AppointmentController.findAll);
 
-router.post("/login", App.login);
+router.get("/appointment/:appointmentId", AppointmentController.findOne);
 
-router.get("/get-all", App.findAll);
+router.post("/appointment", AppointmentController.create);
 
-router.get("/message/:messageId", App.findOne);
+router.put("/appointment", AppointmentController.update);
 
-router.put("/message", App.update);
-
-router.delete("/message", App.delete);
+router.delete("/appointment", AppointmentController.delete);
 
 module.exports = router;

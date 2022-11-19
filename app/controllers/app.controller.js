@@ -1,3 +1,5 @@
+// App stands for appointment
+
 const DBHandler = require("../model/app.model.js");
 
 // Create and Save a new Message
@@ -49,38 +51,6 @@ exports.findOne = (req, res) => {
         message: "Error retrieving message with id " + req.params.messageId,
       });
     });
-};
-exports.login = (req, res) => {
-  console.log(req.body);
-  const { uname, psw } = req.body;
-  DBHandler.getByEmailPass(uname, psw).then((user) => {
-    if (!user) {
-      res.sendFile("html/login.html", { root: __dirname });
-    } else if (user.isAdmin === true) {
-      res.sendFile("html/admin.html", { root: __dirname });
-    } else {
-      res.sendFile("html/home.html", { root: __dirname });
-    }
-  });
-  // DBHandler.getById(req.params.messageId)
-  //   .then((data) => {
-  //     if (!data) {
-  //       return res.status(404).send({
-  //         message: "Message not found with id " + req.params.messageId,
-  //       });
-  //     }
-  //     res.send(data);
-  //   })
-  //   .catch((err) => {
-  //     if (err.kind === "ObjectId") {
-  //       return res.status(404).send({
-  //         message: "Message not found with id " + req.params.messageId,
-  //       });
-  //     }
-  //     return res.status(500).send({
-  //       message: "Error retrieving message with id " + req.params.messageId,
-  //     });
-  //   });
 };
 
 // Update a message identified by the messageId in the request

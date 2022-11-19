@@ -1,26 +1,12 @@
-const UserSchema = require("../schema/user.schema.js");
+const userSchema = require("../schema/user.schema.js");
 
-const user = {
-  email: "",
-  password: "",
-  isAdmin: false,
-  month: "",
-};
 
-const admin = {
-  ...user,
-  email: "gal160693@gmail.com",
-  password: "12345",
-  isAdmin: true,
-};
-
-let DB = { "1q2w": admin }; // save data in-memory as a document object
 
 module.exports = {
   deleteItem: async function (uuid) {
     return new Promise((resolve, reject) => {
       try {
-        UserSchema.UserSchema.methods.delete(uuid);
+        userSchema.userSchema.methods.delete(uuid);
         console.log("Deleted Object with " + uuid);
 
         resolve(uuid);
@@ -42,7 +28,8 @@ module.exports = {
           isAdmin: false,
           month: new Date().getMonth() + 1,
         };
-        UserSchema.UserSchema.methods.create(schema);
+        console.log("creating user..");
+        userSchema.userSchema.methods.create(schema);
         console.log("Saved Object with " + uuid);
 
         resolve(uuid);
@@ -55,7 +42,7 @@ module.exports = {
   getById: function (uuid) {
     return new Promise((resolve, reject) => {
       try {
-        const req = UserSchema.UserSchema.methods.findType(uuid);
+        const req = userSchema.userSchema.methods.findType(uuid);
         console.log("Got Object with " + uuid);
 
         resolve(uuid);
@@ -68,7 +55,7 @@ module.exports = {
 
   getAll: async function () {
     console.log("getall");
-    const req = await UserSchema.find();
+    const req = await userSchema.find();
     console.log("req", req);
     return req;
   },
@@ -76,7 +63,7 @@ module.exports = {
   getAll1: function () {
     return new Promise((resolve, reject) => {
       try {
-        const req = UserSchema.find();
+        const req = userSchema.find();
         console.log("Got all Objects");
 
         resolve(req);
@@ -91,7 +78,7 @@ module.exports = {
   updateExisting: function (uuid, newObj) {
     return new Promise((resolve, reject) => {
       try {
-        UserSchema.UserSchema.methods.update(uuid, newObj);
+        userSchema.userSchema.methods.update(uuid, newObj);
         console.log("Updated Object with " + uuid);
 
         resolve(uuid);

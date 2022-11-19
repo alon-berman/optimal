@@ -3,29 +3,31 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  _id: Number, // represents Date.Now()
+  _id: Number, // Overridden to represent Date.Now()
   email: String,
   password: String,
   isAdmin: Boolean,
   month: Number,
 });
 
-/*
-UserSchema.methods.create = async function (obj) {
+
+userSchema.methods.create = async function (obj) {
+  console.log(obj);
   return mongoose.model("userSchema").create(obj);
 };
-UserSchema.methods.findType = function (uuid) {
-  return mongoose.model("UserSchema").findOne({ _id: uuid });
+userSchema.methods.findType = function (uuid) {
+  return mongoose.model("userSchema").findOne({ _id: uuid });
 };
-UserSchema.methods.findAll = function () {
-  return mongoose.model("UserSchema").find();
+userSchema.methods.findAll = function () {
+  return mongoose.model("userSchema").find();
 };
-UserSchema.methods.update = function (uuid, newObj) {
-  return mongoose.model("UserSchema").updateOne({ _id: uuid }, newObj);
+userSchema.methods.update = function (uuid, newObj) {
+  return mongoose.model("userSchema").updateOne({ _id: uuid }, newObj);
 };
-UserSchema.methods.delete = function (uuid) {
-  return mongoose.model("UserSchema").deleteOne({ _id: uuid });
+userSchema.methods.delete = function (uuid) {
+  return mongoose.model("userSchema").deleteOne({ _id: uuid });
 };
-*/
 
-module.exports = mongoose.model("UserSchema", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = mongoose.model("User", userSchema);

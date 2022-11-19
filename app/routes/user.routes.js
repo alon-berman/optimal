@@ -19,18 +19,18 @@ const App = require("../controllers/user.controller.js");
  *       200:
  *        description: Success
  *
- * **/
+ * **/ 
 
-router.post("/", App.create);
+router.post("/signup", App.create);
 
 router.post("/login", App.login);
 
 router.get("/get-all", App.findAll);
 
-router.get("/message/:messageId", App.findOne);
+router.get("/:userId", App.findOne);
 
-router.put("/message", App.update);
+router.put("/update", App.update);
 
-router.delete("/message", App.delete);
+router.delete("/delete", App.delete);
 
 module.exports = router;

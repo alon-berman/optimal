@@ -3,18 +3,28 @@ const DBHandler = require("../model/user.model.js");
 // Create and Save a new Message
 exports.create = async (req, res) => {
   console.log(req.body);
-  await DBHandler.saveItem(req.body)
-    .then((data) => {
-      res.send("great success!\n UID: " + data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while saving the data.",
+  
+  await DBHandler.saveItem({email: req.body.email, password: req.body.password}).then((user) => {
+    if (!user) {
+      res.sendFile("html/login.html", { root: __dirname });
+    } else if (user.isAdmin === true) {
+      res.sendFile("html/admin.html", { root: __dirname });
+    } else {
+      res.sendFile("html/home.html", { root: __dirname });
+    }
+  }).catch((err) => {
+    if (err.kind === "ObjectId") {
+      return res.status(404).send({
+        message: "Message not found with id " + req.params.messageId,
       });
+    }
+    return res.status(500).send({
+      message: "Error retrieving message with id " + req.params.messageId,
     });
-};
+  });
+}
 
-// Retrieve all messages from the database.
+// Retrieve all messages from the database. 
 exports.findAll = async (req, res) => {
   try {
     const users = await DBHandler.getAll();
@@ -51,8 +61,8 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
 exports.login = (req, res) => {
-  console.log(req);
   console.log(req.body);
   const { uname, psw } = req.body;
   DBHandler.getByEmailPass(uname, psw).then((user) => {
@@ -65,6 +75,7 @@ exports.login = (req, res) => {
     }
   });
 };
+
 
 // Update a message identified by the messageId in the request
 exports.update = (req, res) => {

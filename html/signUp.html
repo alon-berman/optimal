@@ -19,7 +19,8 @@
     <a href="/html/login.html">Login</a>
   </div>
   <form
-    onsubmit="return onSignup(event)"
+    action="/api/user/signup" method="post"
+    onsubmit="return passwordValidation(event)"
     style="border: 1px solid #ccc"
   >
     <div class="container">
@@ -29,8 +30,8 @@
       <label for="email"><b style="color: white">Email</b></label>
       <input type="email" placeholder="Enter Email" name="email" required />
 
-      <label for="psw"><b style="color: white">Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required />
+      <label for="password"><b style="color: white">Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required />
 
       <label for="psw-repeat"
         ><b style="color: white">Retype Password</b></label
