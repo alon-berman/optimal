@@ -1,29 +1,11 @@
-const MessageSchema = require("../schema/app.schema.js");
+const AppointmentSchema = require("../schema/app.schema.js");
 
-const user = {
-  firstName: "",
-  lastName: "",
-  phoneNr: "",
-  email: "",
-  password: "",
-  isAdmin: false,
-  month: "",
-};
-
-const admin = {
-  ...user,
-  email: "gal160693@gmail.com",
-  password: "12345",
-  isAdmin: true,
-};
-
-let DB = { "1q2w": admin }; // save data in-memory as a document object
 
 module.exports = {
   deleteItem: async function (uuid) {
     return new Promise((resolve, reject) => {
       try {
-        MessageSchema.MessageSchema.methods.delete(uuid);
+        AppointmentSchema.appointment.methods.delete(uuid);
         console.log("Deleted Object with " + uuid);
 
         resolve(uuid);
@@ -40,13 +22,14 @@ module.exports = {
       try {
         const schema = {
           _id: uuid,
+          name: data.name,
+          email: data.email,
+          visit_type: data.visit_type,
+          branch: data.branch,
+          date: data.date,
           message: data.message,
-          author: data.author,
-          category: data.category,
-          recipient: data.recipient,
-          max_retries_to_send: data.max_retries_to_send,
         };
-        MessageSchema.MessageSchema.methods.create(schema);
+        AppointmentSchema.appointment.methods.create(schema);
         console.log("Saved Object with " + uuid);
 
         resolve(uuid);
@@ -59,7 +42,7 @@ module.exports = {
   getById: function (uuid) {
     return new Promise((resolve, reject) => {
       try {
-        const req = MessageSchema.MessageSchema.methods.findType(uuid);
+        const req = AppointmentSchema.appointment.methods.findType(uuid);
         console.log("Got Object with " + uuid);
 
         resolve(uuid);
@@ -73,13 +56,13 @@ module.exports = {
   getAll: function () {
     return new Promise((resolve, reject) => {
       try {
-        const req = MessageSchema.MessageSchema.methods.findAll();
+        const req = AppointmentSchema.appointment.methods.findAll();
         console.log("Got all Objects");
 
-        resolve();
+        resolve(req);
         return req;
-      } catch {
-        reject();
+      } catch (err){
+        reject(err);
       }
     });
   },
@@ -87,7 +70,7 @@ module.exports = {
   updateExisting: function (uuid, newObj) {
     return new Promise((resolve, reject) => {
       try {
-        MessageSchema.MessageSchema.methods.update(uuid, newObj);
+        AppointmentSchema.appointment.methods.update(uuid, newObj);
         console.log("Updated Object with " + uuid);
 
         resolve(uuid);

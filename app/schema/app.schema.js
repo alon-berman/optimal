@@ -2,28 +2,31 @@ const mongoose =require('mongoose');
 
 const {Schema} = mongoose;
 
-
-const MessageSchema = new Schema({
+const appointmentSchema = new Schema({
     _id: Number, // represents Date.Now()
-    message: String, // String is shorthand for {type: String}
-    author: String,
-    category: String,
-    recipient: String,
-    max_retries_to_send: Number,
+    name: String, // String is shorthand for {type: String}
+    email: String,
+    visit_type: String,
+    date: String,
+    message: String,
 });
 
-MessageSchema.methods.create = async function (obj) {
-    return mongoose.model('MessageSchema').create(obj);
+appointmentSchema.methods.create = async function (obj) {
+    return mongoose.model('appointmentSchema').create(obj);
 }
-MessageSchema.methods.findType = function (uuid) {
-    return mongoose.model('MessageSchema').findOne({_id: uuid});
+appointmentSchema.methods.findType = function (uuid) {
+    return mongoose.model('appointmentSchema').findOne({_id: uuid});
 }
-MessageSchema.methods.findAll = function () {
-    return mongoose.model('MessageSchema').find();
+appointmentSchema.methods.findAll = function () {
+    return mongoose.model('appointmentSchema').find();
 }
-MessageSchema.methods.update = function (uuid, newObj) {
-    return mongoose.model('MessageSchema').updateOne({_id: uuid}, newObj);
+appointmentSchema.methods.update = function (uuid, newObj) {
+    return mongoose.model('appointmentSchema').updateOne({_id: uuid}, newObj);
 }
-MessageSchema.methods.delete = function (uuid) {
-    return mongoose.model('MessageSchema').deleteOne({_id: uuid});
+appointmentSchema.methods.delete = function (uuid) {
+    return mongoose.model('appointmentSchema').deleteOne({_id: uuid});
 }
+
+mongoose.model("appointmentSchema", appointmentSchema);
+
+module.exports.appointment = appointmentSchema
