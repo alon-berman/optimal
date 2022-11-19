@@ -28,10 +28,11 @@
     <a id="time" style=" margin: auto; position:relative"></a>
   </div>
   <form action="/api/user/login" method="post" class="form-horizontal" >
-    <div class="container">
-        <div class="form-group">
-          <div class="col-sm-4">
-            <label class="control-label col-sm-1" for="text">Email</label>
+    <div class="form-group">
+      <div class="container" >
+            <div class="col-sm-5">
+              <h1 style="color: white">Login</h1>
+            <label class="control-label col-sm-1" style="color: white" for="text">Email</label>
             <input
               type="text"
               class="form-control"
@@ -40,9 +41,9 @@
               name="uname" required
             />
           </div>
-          <br><br><br><br>
-          <div class="col-sm-4">
-            <label class="control-label col-sm-1" for="text">Password</label>
+          <br><br><br><br><br><br><br><br>
+          <div class="col-sm-5">
+            <label class="control-label col-sm-1" style="color: white" for="text">Password</label>
             <input
               type="password"
               class="form-control"
@@ -57,15 +58,12 @@
       <label for="psw"><b style="color: white">Password</b></label>
       <input type="password" placeholder="Enter password" name="psw" required/> -->
       <br><br><br><br>
-      <div class="col-sm-4">
+
+    <div class="col-sm-5">
       <button  class="signupbtn" type="submit">Sign in</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"/>
         <b style="color: white">Remember me </b>
-      </label>
-      </div>
-    </div>
-    <div class="col-sm-4">
       <button
         type="button"
         class="signupbtn"
@@ -73,17 +71,16 @@
       >
         <a>Sign up</a>
       </button>
+      <button
+      type="button"
+      class="cancelbtn"
+      onclick="window.location='login.html'"
+    >
+      Cancel
+    </button>
     </div>
     <br><br><br>
-    <div class="col-sm-4">
-      <button
-        type="button"
-        class="cancelbtn"
-        onclick="window.location='login.html'"
-      >
-        Cancel
-      </button>
-    </div>
+
   </form>
   <footer class="navbar navbar-fixed-bottom">
     <div class="container">
