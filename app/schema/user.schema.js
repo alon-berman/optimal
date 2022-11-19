@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-
 const userSchema = new Schema({
   _id: Number, // Overridden to represent Date.Now()
   email: String,
@@ -10,7 +9,6 @@ const userSchema = new Schema({
   isAdmin: Boolean,
   month: Number,
 });
-
 
 userSchema.methods.create = async function (obj) {
   return mongoose.model("userSchema").create(obj);
@@ -28,6 +26,4 @@ userSchema.methods.delete = function (uuid) {
   return mongoose.model("userSchema").deleteOne({ _id: uuid });
 };
 
-mongoose.model("userSchema", userSchema);
-
-module.exports.User = userSchema
+module.exports = mongoose.model("userSchema", userSchema);

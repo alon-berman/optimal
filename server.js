@@ -6,9 +6,8 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 const Controller = require("./app/controllers/user.controller.js");
 const path = require("path");
-const bodyParser = require('body-parser');
-const DBHandler = require('./db/db_handler.js')
-
+const bodyParser = require("body-parser");
+const DBHandler = require("./db/db_handler.js");
 
 // ##########################
 // Interface definitions
@@ -26,14 +25,16 @@ let PORT = 8081;
 // Server usage configuration
 // ##########################
 
-app.use( bodyParser.json());       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-})); 
-
+app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(
+  bodyParser.urlencoded({
+    // to support URL-encoded bodies
+    extended: true,
+  })
+);
 
 // ###################
-// Swagger definitions 
+// Swagger definitions
 // ###################
 const swaggerOptions = {
   swaggerDefinition: {
@@ -48,16 +49,16 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 // ###################
 
-
-// Point express to the root folder of the hosted files 
+// Point express to the root folder of the hosted files
 app.use(express.static(__dirname));
-
 
 // ###################
 // Routing Definitions
 // ###################
 
 app.use("/css", express.static(path.join("css")));
+
+app.use("/html", express.static(path.join("html")));
 
 app.use("/html", express.static(path.join("html")));
 
@@ -76,52 +77,56 @@ app.post("/contactUs", (req, res) => {
   // Put contact us log
 });
 
-app.use("/api/user", userRouteApi); 
+app.use("/api/user", userRouteApi);
 
 app.use("/api/appointment", appointmentApi);
 
-try{
+try {
   app.listen(PORT, () => {
     // print available routes
     DBHandler.connect();
     app._router.stack.forEach(print.bind(null, []));
-  
-  
+
     console.log(`Server is listening on port ${PORT}`);
   });
-  
 } catch {
-  DBHandler.client.close()
+  DBHandler.client.close();
 }
-
 
 // ########
 // DEBUG
 // #########
-function print (path, layer) {
+function print(path, layer) {
   if (layer.route) {
-    layer.route.stack.forEach(print.bind(null, path.concat(split(layer.route.path))))
-  } else if (layer.name === 'router' && layer.handle.stack) {
-    layer.handle.stack.forEach(print.bind(null, path.concat(split(layer.regexp))))
+    layer.route.stack.forEach(
+      print.bind(null, path.concat(split(layer.route.path)))
+    );
+  } else if (layer.name === "router" && layer.handle.stack) {
+    layer.handle.stack.forEach(
+      print.bind(null, path.concat(split(layer.regexp)))
+    );
   } else if (layer.method) {
-    console.log('%s /%s',
+    console.log(
+      "%s /%s",
       layer.method.toUpperCase(),
-      path.concat(split(layer.regexp)).filter(Boolean).join('/'))
+      path.concat(split(layer.regexp)).filter(Boolean).join("/")
+    );
   }
 }
 
-function split (thing) {
-  if (typeof thing === 'string') {
-    return thing.split('/')
+function split(thing) {
+  if (typeof thing === "string") {
+    return thing.split("/");
   } else if (thing.fast_slash) {
-    return ''
+    return "";
   } else {
-    var match = thing.toString()
-      .replace('\\/?', '')
-      .replace('(?=\\/|$)', '$')
-      .match(/^\/\^((?:\\[.*+?^${}()|[\]\\\/]|[^.*+?^${}()|[\]\\\/])*)\$\//)
+    var match = thing
+      .toString()
+      .replace("\\/?", "")
+      .replace("(?=\\/|$)", "$")
+      .match(/^\/\^((?:\\[.*+?^${}()|[\]\\\/]|[^.*+?^${}()|[\]\\\/])*)\$\//);
     return match
-      ? match[1].replace(/\\(.)/g, '$1').split('/')
-      : '<complex:' + thing.toString() + '>'
+      ? match[1].replace(/\\(.)/g, "$1").split("/")
+      : "<complex:" + thing.toString() + ">";
   }
 }

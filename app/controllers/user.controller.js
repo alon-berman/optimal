@@ -1,15 +1,18 @@
 const DBHandler = require("../model/user.model.js");
-const path = require('path');
+const path = require("path");
 
 // Create and Save a new Message
 exports.create = async (req, res) => {
-  console.log("Creating instance")
+  console.log("Creating instance");
   console.log(req.body);
-  
-  await DBHandler.saveItem({email: req.body.email, password: req.body.password});
-}
 
-// Retrieve all messages from the database. 
+  await DBHandler.saveItem({
+    email: req.body.email,
+    password: req.body.password,
+  });
+};
+
+// Retrieve all messages from the database.
 exports.findAll = async (req, res) => {
   try {
     const users = await DBHandler.getAll();
@@ -52,15 +55,14 @@ exports.login = (req, res) => {
   const { uname, psw } = req.body;
   DBHandler.getByEmailPass(uname, psw).then((user) => {
     if (!user) {
-      res.sendFile("html/login.html", { root: __dirname });
+      res.redirect("/html/login.html");
     } else if (user.isAdmin === true) {
-      res.sendFile("html/admin.html", { root: __dirname });
+      res.redirect("/html/admin.html");
     } else {
-      res.sendFile("html/home.html", { root: __dirname });
+      res.redirect("/html/appointment.html");
     }
   });
 };
-
 
 // Update a message identified by the messageId in the request
 exports.update = (req, res) => {

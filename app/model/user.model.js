@@ -1,7 +1,5 @@
 const userSchema = require("../schema/user.schema.js");
 
-
-
 module.exports = {
   deleteItem: async function (uuid) {
     return new Promise((resolve, reject) => {
@@ -11,7 +9,7 @@ module.exports = {
 
         resolve(uuid);
       } catch {
-        reject(uuid); 
+        reject(uuid);
       }
     });
   },
@@ -58,6 +56,11 @@ module.exports = {
     const req = await userSchema.find();
     console.log("req", req);
     return req;
+  },
+
+  getByEmailPass: async function (email, password) {
+    const user = await userSchema.find({ email: email, password: password });
+    return user;
   },
 
   getAll1: function () {
