@@ -34,6 +34,27 @@ app.use(
 );
 
 // ###################
+// WS definitions
+// ###################
+
+const { Server } = require('ws');
+const server = express().use((req, res) => res.sendFile('/login.html', { root: __dirname })).listen(3000, () => console.log(`WS Listening on ${3000}`));
+
+const ws_server = new Server({ server });
+
+ws_server.on('connection', (ws) => {
+  console.log('New client connected!');
+
+  ws.on('close', () => console.log('Client has disconnected!'));
+});
+
+setInterval(() => {
+  ws_server.clients.forEach((client) => {
+    client.send(new Date().toTimeString());
+  });
+}, 1000);
+
+// ###################
 // Swagger definitions
 // ###################
 const swaggerOptions = {

@@ -10,6 +10,15 @@
     }
   </style>
   <script src="/common.js" defer></script>
+  <script>
+    let webSocket = new WebSocket('ws://0.0.0.0:3000');
+    let el;
+
+    webSocket.onmessage = (event) => {
+      el = document.getElementById('time');
+      el.innerHTML = 'Current time on server is: ' + event.data;
+    };
+  </script>
 </head>
 <body>
   <div class="topnav">
@@ -20,6 +29,7 @@
     <a href="/html/contactUs.html">Contact Us </a>
     <a href="/html/login.html">Login</a>
     <a href="/html/about_us.html">About us</a>
+    <a id="time" style=" margin: auto; position:relative"></a>
   </div>
   <form action="/api/user/login" method="post">
     <div class="container">
