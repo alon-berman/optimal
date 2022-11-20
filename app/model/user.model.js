@@ -67,7 +67,7 @@ module.exports = {
     const user = await userSchema.find({ email: email, password: password });
     if (user.length > 0){
       console.log("user found");
-        return user;
+      return user;
     }
     console.log("user not found");
     return null;  

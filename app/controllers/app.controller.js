@@ -7,7 +7,7 @@ exports.create = async (req, res) => {
   console.log(req.body);
   await DBHandler.saveItem(req.body)
     .then((data) => {
-      res.redirect("/");
+      res.redirect("/html/appointment.html");
     })
     .catch((err) => {
       res.status(500).send({
