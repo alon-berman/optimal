@@ -5,7 +5,6 @@ const { response } = require("express");
 // Create and Save a new Message
 exports.create = async (req, res) => {
   console.log("Creating instance");
-  console.log(req.body);
 
   await DBHandler.saveItem({
     email: req.body.email,
@@ -56,13 +55,22 @@ exports.login = (req, res) => {
   console.log(req.body);
   const { uname, psw } = req.body;
   DBHandler.getByEmailPass(uname, psw).then((user) => {
-    if (!user) {
-      res.redirect("/html/login.html");
-    } else if (user.isAdmin === true) {
-      res.redirect("/html/admin.html");
-    } else {
-      res.redirect("/html/appointment.html");
-    }
+    console.log(user);
+    if (user != null){
+      user = user[user.length - 1];
+      console.log(user);
+
+      if (!user.isAdmin) {
+        res.redirect("/html/login.html");
+      } else if (user.isAdmin) {
+        res.redirect("/html/admin.html");
+      } else {
+        res.redirect("/html/appointment.html");
+      }
+  }
+  
+  else {    console.log("user not found...");
+    res.redirect("/html/login.html")}
   });
 };
 

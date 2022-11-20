@@ -17,13 +17,18 @@ module.exports = {
   saveItem: async function (data) {
     return new Promise((resolve, reject) => {
       let uuid = generateID();
+      let isAdmin = false;
+      console.log("Data is"+ data);
+      if ("isAdmin" in data){
+        isAdmin = data.isAdmin
+      }
 
       try {
         const user_registration_request = {
           _id: uuid,
           email: data.email,
           password: data.password,
-          isAdmin: false,
+          isAdmin: isAdmin,
           month: new Date().getMonth() + 1,
         };
         console.log("creating user..");
@@ -60,7 +65,13 @@ module.exports = {
 
   getByEmailPass: async function (email, password) {
     const user = await userSchema.find({ email: email, password: password });
-    return user;
+    if (user.length > 0){
+      console.log("user found");
+        return user;
+    }
+    console.log("user not found");
+    return null;  
+    
   },
 
   getAll1: function () {

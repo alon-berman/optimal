@@ -27,7 +27,7 @@ router.get("/appointment/:appointmentId", AppointmentController.findOne);
 
 router.post("/appointment", AppointmentController.create);
 
-router.put("/appointment", AppointmentController.update);
+router.post("/edit", AppointmentController.update);
 
 router.delete("/appointment", AppointmentController.delete);
 

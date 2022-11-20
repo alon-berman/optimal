@@ -8,6 +8,7 @@ const Controller = require("./app/controllers/user.controller.js");
 const path = require("path");
 const bodyParser = require("body-parser");
 const DBHandler = require("./db/db_handler.js");
+const ADBHandler = require("./app/model/user.model.js");
 
 // ##########################
 // Interface definitions
@@ -106,6 +107,7 @@ try {
   app.listen(PORT, () => {
     // print available routes
     DBHandler.connect();
+    create_root();
     app._router.stack.forEach(print.bind(null, []));
 
     console.log(`Server is listening on port ${PORT}`);
@@ -150,4 +152,8 @@ function split(thing) {
       ? match[1].replace(/\\(.)/g, "$1").split("/")
       : "<complex:" + thing.toString() + ">";
   }
+}
+
+function create_root(){
+  ADBHandler.saveItem({email:"admin@g.com",password:"123456", isAdmin: true})
 }
