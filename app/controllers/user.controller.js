@@ -61,7 +61,7 @@ exports.login = (req, res) => {
       console.log(user);
 
       if (!user.isAdmin) {
-        res.redirect("/html/login.html");
+        res.redirect("/html/appointment.html");
       } else if (user.isAdmin) {
         res.redirect("/html/admin.html");
       } else {
