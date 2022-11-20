@@ -22,7 +22,7 @@
   <h2>Delete Appoitmnent</h2>
   <form>
     <div class="form-group">
-      <label class="control-label col-sm-1 "  id="message_id" for="text">ID</label>
+      <label class="control-label col-sm-1 "  id="appointment_id" for="text">ID</label>
       <input type="text" class="form-control" id="message_id" placeholder="Enter message id" name="message">
     </div>
     <!-- todo: use update function -->
@@ -30,21 +30,6 @@
     <div clas="statusOutput"></div>
   </form>
 </div>
-  <script>
-  $('#deleteButton').click(function() {
-    data = {"messageId": $('#message_id').val()};
-    $.ajax({
-      type: 'DELETE',
-      url: 'http://localhost:8010/proxy/message',
-      contentType: 'application/json',
-      data: JSON.stringify(data), // access in body
-    }).done(function (resp) {
-      $('.statusOutput').append(resp);
-    }).fail(function (msg) {
-        console.log('sOMETHING HAPPENED');
-    })
-  });
-    </script>
 <footer class="navbar navbar-fixed-bottom">
   <div class="container">
     <span class="text-light">All rights reserved to Alon , Raz , Gal and Peleg</span>
